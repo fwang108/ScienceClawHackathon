@@ -18,6 +18,7 @@
 - Support viewport widths of 280px and wider without header identity/action overlap and with their bounds inside the viewport; unrelated pre-existing main-content document overflow is outside this task's scope.
 - Keep main content visibly below the fixed header when organizer identities wrap.
 - Do not change flyer or sponsor-material layouts.
+- At 1241–1500px, retain the single-row desktop navigation and organizer logo sizes while compacting only the ScienceClaw mark and lettering.
 
 ---
 
@@ -194,3 +195,57 @@ Expected: no `git diff --check` output; the diff contains only the responsive re
 git add scripts/test_scienceclaw_rebrand.py swarm/css/styles.css
 git commit -m "fix: wrap organizer logos on narrow screens"
 ```
+
+---
+
+### Task 2: Keep the visible wordmark clear of MIT at laptop widths
+
+**Files:**
+- Modify: `scripts/test_scienceclaw_rebrand.py`
+- Modify: `swarm/css/styles.css`
+
+**Interfaces:**
+- Consumes: the existing `@media (min-width: 1241px) and (max-width: 1500px)` treatment and visible `.identity__scienceclaw-mark`, `.identity__scienceclaw-word`, and `.identity--mit img` descendants.
+- Produces: a compact intermediate wordmark whose visible artwork never intersects MIT.
+
+- [ ] **Step 1: Extend the browser regression with visible MIT geometry**
+
+Add widths `1241`, `1250`, `1310`, `1320`, and `1500` to `test_shared_header_identities_keep_visible_wordmark_clear_of_action`. Include `.identity--mit img` in the evaluated geometry and report any intersections with the existing `visibleWordmark` descendants:
+
+```javascript
+const mitImage = boxFor('.identity--mit img');
+wordmarkMitOverlaps: visibleWordmark
+  .filter((box) => intersects(box, mitImage))
+  .map((box) => box.selector)
+```
+
+Assert `wordmarkMitOverlaps` is empty at every tested width. This catches the real bug because the text can overflow its parent even when the parent and MIT link boxes remain separate.
+
+- [ ] **Step 2: Verify the regression fails for the deployed layout**
+
+Run:
+
+```bash
+PYTHONDONTWRITEBYTECODE=1 /home/fiona/miniconda3/bin/python scripts/test_scienceclaw_rebrand.py ScienceClawRenderedIdentityTests.test_shared_header_identities_keep_visible_wordmark_clear_of_action
+```
+
+Expected: FAIL at 1241–1310px because `.identity__scienceclaw-word` intersects `.identity--mit img`.
+
+- [ ] **Step 3: Compact the intermediate ScienceClaw wordmark**
+
+Within `@media (min-width: 1241px) and (max-width: 1500px)`, set the pincer height to `34px`, wordmark font size to `0.82rem`, and wordmark letter spacing to `0.22em`. Preserve the existing 185px wordmark column, organizer sizes, navigation, and all other breakpoints.
+
+- [ ] **Step 4: Verify focused and full regressions**
+
+Run:
+
+```bash
+PYTHONDONTWRITEBYTECODE=1 /home/fiona/miniconda3/bin/python scripts/test_scienceclaw_rebrand.py ScienceClawRenderedIdentityTests.test_shared_header_identities_keep_visible_wordmark_clear_of_action
+PYTHONDONTWRITEBYTECODE=1 /home/fiona/miniconda3/bin/python -m unittest discover -s scripts -p 'test_*.py'
+```
+
+Expected: focused test reports `Ran 1 test` and `OK`; full suite reports 26 passing tests.
+
+- [ ] **Step 5: Commit, deploy, and verify live geometry**
+
+Commit `scripts/test_scienceclaw_rebrand.py`, `swarm/css/styles.css`, and these updated design/plan documents. Deploy `swarm/` to the existing `lamm/infinite-hackathon` project, repoint `scienceclawhack.ai`, and run the same descendant intersection check against the live page at every regression width.
