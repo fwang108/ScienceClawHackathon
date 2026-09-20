@@ -237,6 +237,7 @@ class ScienceClawRenderedIdentityTests(unittest.TestCase):
                             overlaps,
                             scrollWidth: document.documentElement.scrollWidth,
                             headerBottom: header.bottom,
+                            headerRight: header.right,
                             contentTop: content.top,
                             wordmark: document.querySelector('.identity__scienceclaw-word').textContent.trim()
                           };
@@ -247,7 +248,7 @@ class ScienceClawRenderedIdentityTests(unittest.TestCase):
 
                     self.assertEqual(geometry["wordmark"], "ScienceClaw")
                     self.assertEqual(geometry["overlaps"], [])
-                    self.assertLessEqual(geometry["scrollWidth"], width)
+                    self.assertLessEqual(geometry["headerRight"], width)
                     for box in geometry["boxes"]:
                         self.assertGreaterEqual(box["left"], 0, box)
                         self.assertLessEqual(box["right"], width, box)

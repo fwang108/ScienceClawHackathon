@@ -396,14 +396,6 @@ body.no-webgl {
     padding-top: 12rem;
   }
 
-  .card-grid {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .card {
-    min-width: 0;
-    max-width: 100%;
-  }
 }
 
 @media (min-width: 1241px) and (max-width: 1500px) {
@@ -649,16 +641,11 @@ body.no-webgl {
 }
 
 @media (max-width: 640px) {
-  .apply-main { padding: 7rem 1rem 3rem; }
+  .hero { padding-top: 13rem; }
+  .apply-main { padding: 13rem 1rem 3rem; }
   .apply-form__row { align-items: flex-start; flex-direction: column; }
 }
 
-@media (max-width: 480px) {
-  body { overflow-x: hidden; }
-  main { overflow-x: hidden; }
-  .hero,
-  .apply-main { padding-top: 13rem; }
-}
 
 .hero__actions {
   display: flex; gap: 1rem; margin-top: 2rem;
