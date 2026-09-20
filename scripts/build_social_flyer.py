@@ -18,7 +18,7 @@ PDF_PATH = OUTPUT_DIR / "scienceclaw-hackathon-flyer-16x9.pdf"
 CAPTIONS_PATH = OUTPUT_DIR / "social-captions.md"
 PUBLIC_DIR = ROOT / "swarm"
 PUBLIC_SOCIAL_DIR = PUBLIC_DIR / "assets" / "social"
-APPLICATION_URL = "https://scienceclaw.dev/apply.html"
+APPLICATION_URL = "https://scienceclawhack.ai/apply.html"
 
 
 def qr_row_runs(matrix) -> str:

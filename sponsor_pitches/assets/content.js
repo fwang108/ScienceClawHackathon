@@ -19,7 +19,7 @@
       dates: "Oct 30 – Nov 1, 2026",
       venue: "MIT Media Lab",
       contact: "fw2@mit.edu",
-      url: "https://scienceclaw.dev",
+      url: "https://scienceclawhack.ai",
     },
     tiers: [
       { key: "supporter", name: "Supporter", amount: "$5K", representatives: 2, summary: "Visibility, two passes, mentors, and showcase access." },

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 import re
 import unittest
 import xml.etree.ElementTree as ET
@@ -18,7 +19,8 @@ ACTIVE_PAGES = (
     ROOT / "sponsor_pitches" / "deck.html",
     ROOT / "sponsor_pitches" / "one-pager.html",
 )
-APPLICATION_URL = "https://scienceclaw.dev/apply.html"
+PUBLIC_ORIGIN = "https://scienceclawhack.ai"
+APPLICATION_URL = f"{PUBLIC_ORIGIN}/apply.html"
 
 
 class ScienceClawRenderedIdentityTests(unittest.TestCase):
@@ -58,11 +60,65 @@ class ScienceClawRenderedIdentityTests(unittest.TestCase):
                 page = self.browser.new_page()
                 page.goto(path.as_uri(), wait_until="domcontentloaded")
                 hrefs = page.locator("a").evaluate_all(
-                    "links => links.map(link => link.href).filter(href => href.includes('scienceclaw.dev'))"
+                    "links => links.map(link => link.href).filter(href => href.includes('scienceclawhack.ai'))"
                 )
                 page.close()
                 self.assertTrue(hrefs)
-                self.assertTrue(all(href.startswith("https://scienceclaw.dev") for href in hrefs))
+                self.assertTrue(all(href.startswith(PUBLIC_ORIGIN) for href in hrefs))
+
+    def test_public_pages_publish_their_canonical_urls(self) -> None:
+        expected = (
+            (ROOT / "swarm" / "index.html", f"{PUBLIC_ORIGIN}/"),
+            (ROOT / "swarm" / "apply.html", APPLICATION_URL),
+            (ROOT / "swarm" / "flyer.html", f"{PUBLIC_ORIGIN}/flyer.html"),
+        )
+        for path, canonical_url in expected:
+            with self.subTest(page=path.relative_to(ROOT)):
+                page = self.browser.new_page()
+                page.goto(path.as_uri(), wait_until="domcontentloaded")
+                canonicals = page.locator('link[rel="canonical"]').evaluate_all(
+                    "links => links.map(link => link.href)"
+                )
+                page.close()
+                self.assertEqual(canonicals, [canonical_url])
+
+    def test_www_host_redirect_is_permanent_and_preserves_the_path(self) -> None:
+        config = json.loads((ROOT / "swarm" / "vercel.json").read_text(encoding="utf-8"))
+        self.assertEqual(
+            config,
+            {
+                "redirects": [
+                    {
+                        "source": "/:path*",
+                        "has": [
+                            {
+                                "type": "host",
+                                "value": "www.scienceclawhack.ai",
+                            }
+                        ],
+                        "destination": "https://scienceclawhack.ai/:path*",
+                        "permanent": True,
+                    }
+                ]
+            },
+        )
+
+    def test_active_files_do_not_reference_retired_domains(self) -> None:
+        active_paths = [ROOT / "README.md"]
+        for directory in ("scripts", "sponsor_pitches", "swarm", "v2"):
+            active_paths.extend(
+                path
+                for path in (ROOT / directory).rglob("*")
+                if path.is_file()
+                and path.suffix in {".html", ".js", ".md", ".py", ".svg", ".json"}
+            )
+
+        retired_domains = ("scienceclaw" + ".dev", "swarmhack" + ".ai")
+        for path in active_paths:
+            with self.subTest(path=path.relative_to(ROOT)):
+                source = path.read_text(encoding="utf-8")
+                for retired_domain in retired_domains:
+                    self.assertNotIn(retired_domain, source)
 
     def test_public_wordmarks_use_full_scienceclaw_name(self) -> None:
         wordmarks = (

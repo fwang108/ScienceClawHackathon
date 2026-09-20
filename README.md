@@ -6,7 +6,7 @@ Three visual themes of the same hackathon page — pick the one you like, or use
 
 ## ScienceClaw — Black & gold (live)
 
-The production-ready build lives in `swarm/` and uses `https://scienceclaw.dev`. It preserves the black-and-gold visual system with the ScienceClaw origami pincer mark.
+The production-ready build lives in `swarm/` and uses `https://scienceclawhack.ai`. It preserves the black-and-gold visual system with the ScienceClaw origami pincer mark.
 
 ## v1 — Blue (synthwave)
 
@@ -35,7 +35,7 @@ The 3D scene pulls Three.js from jsDelivr CDN (`three@0.160.0`), so an internet 
 
 ## Structure
 
-- `swarm/` — live black & gold build (prepared for scienceclaw.dev), ScienceClaw identity and origami pincer mark
+- `swarm/` — live black & gold build (prepared for scienceclawhack.ai), ScienceClaw identity and origami pincer mark
 - `v1/` — blue synthwave theme (original)
 - `v2/` — black & gold theme (variant)
 

@@ -137,7 +137,7 @@ class SponsorPitchBrowserTests(unittest.TestCase):
                     self.assertEqual(contract["headline"], "Build the collective that builds the future of science.")
                     self.assertEqual(contract["event"]["targetParticipants"], 150)
                     self.assertEqual(contract["event"]["contact"], "fw2@mit.edu")
-                    self.assertEqual(contract["event"]["url"], "https://scienceclaw.dev")
+                    self.assertEqual(contract["event"]["url"], "https://scienceclawhack.ai")
                     self.assertEqual(contract["tiers"], expected_tiers)
                     self.assertEqual(
                         contract["capabilityPartner"]["terms"],
