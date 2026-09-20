@@ -190,7 +190,7 @@ class ScienceClawRenderedIdentityTests(unittest.TestCase):
     def test_shared_header_identities_wrap_without_overlap_or_overflow(self) -> None:
         pages = (
             (ROOT / "swarm" / "index.html", ".hero__meta"),
-            (ROOT / "swarm" / "apply.html", ".apply-main"),
+            (ROOT / "swarm" / "apply.html", ".apply-page__inner"),
         )
         widths = (280, 320, 375, 768, 1240, 1440)
 
