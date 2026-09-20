@@ -400,6 +400,12 @@ body.no-webgl {
     column-gap: 10px;
   }
 
+  .identity__scienceclaw-mark { height: 34px; }
+  .identity__scienceclaw-word {
+    font-size: 0.82rem;
+    letter-spacing: 0.22em;
+  }
+
   .identity__institutions { gap: 22px; }
   .identity--mit img { height: 28px; }
 

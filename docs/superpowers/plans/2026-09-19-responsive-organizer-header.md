@@ -208,7 +208,7 @@ git commit -m "fix: wrap organizer logos on narrow screens"
 - Consumes: the existing `@media (min-width: 1241px) and (max-width: 1500px)` treatment and visible `.identity__scienceclaw-mark`, `.identity__scienceclaw-word`, and `.identity--mit img` descendants.
 - Produces: a compact intermediate wordmark whose visible artwork never intersects MIT.
 
-- [ ] **Step 1: Extend the browser regression with visible MIT geometry**
+- [x] **Step 1: Extend the browser regression with visible MIT geometry**
 
 Add widths `1241`, `1250`, `1310`, `1320`, and `1500` to `test_shared_header_identities_keep_visible_wordmark_clear_of_action`. Include `.identity--mit img` in the evaluated geometry and report any intersections with the existing `visibleWordmark` descendants:
 
@@ -221,7 +221,7 @@ wordmarkMitOverlaps: visibleWordmark
 
 Assert `wordmarkMitOverlaps` is empty at every tested width. This catches the real bug because the text can overflow its parent even when the parent and MIT link boxes remain separate.
 
-- [ ] **Step 2: Verify the regression fails for the deployed layout**
+- [x] **Step 2: Verify the regression fails for the deployed layout**
 
 Run:
 
@@ -231,11 +231,11 @@ PYTHONDONTWRITEBYTECODE=1 /home/fiona/miniconda3/bin/python scripts/test_science
 
 Expected: FAIL at 1241–1310px because `.identity__scienceclaw-word` intersects `.identity--mit img`.
 
-- [ ] **Step 3: Compact the intermediate ScienceClaw wordmark**
+- [x] **Step 3: Compact the intermediate ScienceClaw wordmark**
 
 Within `@media (min-width: 1241px) and (max-width: 1500px)`, set the pincer height to `34px`, wordmark font size to `0.82rem`, and wordmark letter spacing to `0.22em`. Preserve the existing 185px wordmark column, organizer sizes, navigation, and all other breakpoints.
 
-- [ ] **Step 4: Verify focused and full regressions**
+- [x] **Step 4: Verify focused and full regressions**
 
 Run:
 

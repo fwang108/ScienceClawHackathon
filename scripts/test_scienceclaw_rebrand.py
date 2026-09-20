@@ -192,7 +192,22 @@ class ScienceClawRenderedIdentityTests(unittest.TestCase):
             (ROOT / "swarm" / "index.html", ".hero__meta"),
             (ROOT / "swarm" / "apply.html", ".apply-page__inner"),
         )
-        widths = (280, 308, 320, 375, 480, 481, 768, 1240, 1440)
+        widths = (
+            280,
+            308,
+            320,
+            375,
+            480,
+            481,
+            768,
+            1240,
+            1241,
+            1250,
+            1310,
+            1320,
+            1440,
+            1500,
+        )
 
         for path, content_selector in pages:
             for width in widths:
@@ -245,6 +260,7 @@ class ScienceClawRenderedIdentityTests(unittest.TestCase):
                             boxFor('.identity__scienceclaw-mark'),
                             boxFor('.identity__scienceclaw-word')
                           ];
+                          const mitImage = boxFor('.identity--mit img');
                           const header = document.querySelector('.nav').getBoundingClientRect();
                           const content = document.querySelector(contentSelector).getBoundingClientRect();
                           return {
@@ -254,6 +270,9 @@ class ScienceClawRenderedIdentityTests(unittest.TestCase):
                             visibleWordmark,
                             wordmarkActionOverlaps: visibleWordmark
                               .filter((box) => intersects(box, mobileAction))
+                              .map((box) => box.selector),
+                            wordmarkMitOverlaps: visibleWordmark
+                              .filter((box) => intersects(box, mitImage))
                               .map((box) => box.selector),
                             headerBottom: header.bottom,
                             headerRight: header.right,
@@ -269,6 +288,7 @@ class ScienceClawRenderedIdentityTests(unittest.TestCase):
                     self.assertEqual(geometry["overlaps"], [])
                     if width <= 1240:
                         self.assertEqual(geometry["wordmarkActionOverlaps"], [], geometry)
+                    self.assertEqual(geometry["wordmarkMitOverlaps"], [], geometry)
                     self.assertLessEqual(geometry["headerRight"], width)
                     for box in geometry["boxes"]:
                         self.assertGreaterEqual(box["left"], 0, box)
