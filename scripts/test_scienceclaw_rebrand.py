@@ -187,6 +187,75 @@ class ScienceClawRenderedIdentityTests(unittest.TestCase):
         self.assertEqual(page.locator(".dropbox-upload").count(), 0)
         page.close()
 
+    def test_shared_header_identities_wrap_without_overlap_or_overflow(self) -> None:
+        pages = (
+            (ROOT / "swarm" / "index.html", ".hero__meta"),
+            (ROOT / "swarm" / "apply.html", ".apply-main"),
+        )
+        widths = (280, 320, 375, 768, 1240, 1440)
+
+        for path, content_selector in pages:
+            for width in widths:
+                with self.subTest(page=path.relative_to(ROOT), width=width):
+                    page = self.browser.new_page(
+                        viewport={"width": width, "height": 900}
+                    )
+                    page.goto(path.as_uri(), wait_until="domcontentloaded")
+                    geometry = page.evaluate(
+                        """({ contentSelector }) => {
+                          const selectors = [
+                            '.identity--scienceclaw',
+                            '.identity--mit',
+                            '.identity--lamm',
+                            '.identity--e14'
+                          ];
+                          const boxes = selectors.map((selector) => {
+                            const rect = document.querySelector(selector).getBoundingClientRect();
+                            return {
+                              selector,
+                              left: rect.left,
+                              right: rect.right,
+                              top: rect.top,
+                              bottom: rect.bottom
+                            };
+                          });
+                          const intersects = (a, b) =>
+                            a.left < b.right && a.right > b.left &&
+                            a.top < b.bottom && a.bottom > b.top;
+                          const overlaps = [];
+                          for (let first = 0; first < boxes.length; first += 1) {
+                            for (let second = first + 1; second < boxes.length; second += 1) {
+                              if (intersects(boxes[first], boxes[second])) {
+                                overlaps.push([boxes[first].selector, boxes[second].selector]);
+                              }
+                            }
+                          }
+                          const header = document.querySelector('.nav').getBoundingClientRect();
+                          const content = document.querySelector(contentSelector).getBoundingClientRect();
+                          return {
+                            boxes,
+                            overlaps,
+                            scrollWidth: document.documentElement.scrollWidth,
+                            headerBottom: header.bottom,
+                            contentTop: content.top,
+                            wordmark: document.querySelector('.identity__scienceclaw-word').textContent.trim()
+                          };
+                        }""",
+                        {"contentSelector": content_selector},
+                    )
+                    page.close()
+
+                    self.assertEqual(geometry["wordmark"], "ScienceClaw")
+                    self.assertEqual(geometry["overlaps"], [])
+                    self.assertLessEqual(geometry["scrollWidth"], width)
+                    for box in geometry["boxes"]:
+                        self.assertGreaterEqual(box["left"], 0, box)
+                        self.assertLessEqual(box["right"], width, box)
+                    if width <= 375:
+                        self.assertGreaterEqual(
+                            geometry["contentTop"], geometry["headerBottom"]
+                        )
+
 
 class ScienceClawArtifactTests(unittest.TestCase):
     """Catch missing or stale generated identity assets."""

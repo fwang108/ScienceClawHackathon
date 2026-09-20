@@ -368,6 +368,35 @@ body.no-webgl {
   }
 }
 
+@media (max-width: 480px) {
+  .nav__identity-row {
+    min-height: 0;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-rows: 42px auto;
+    gap: 0.55rem 0.8rem;
+    padding-bottom: 0.75rem;
+  }
+
+  .identity--scienceclaw {
+    grid-column: 1;
+  }
+
+  .identity__institutions {
+    grid-column: 1 / -1;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+  }
+
+  .nav__mobile-action {
+    grid-column: 2;
+  }
+
+  .hero,
+  .apply-main {
+    padding-top: 12rem;
+  }
+}
+
 @media (min-width: 1241px) and (max-width: 1500px) {
   .nav__identity-row {
     padding-inline: 1rem;
