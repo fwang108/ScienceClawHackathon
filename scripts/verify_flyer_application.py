@@ -20,6 +20,7 @@ FLYER_HTML = V2_DIR / "flyer.html"
 QR_PATH = V2_DIR / "assets" / "social" / "scienceclaw-apply-qr.svg"
 CAPTIONS_PATH = V2_DIR / "assets" / "social" / "social-captions.md"
 EXPECTED_APPLICATION_URL = "https://scienceclawhack.ai/apply.html"
+EXPECTED_QR_MODULE_COLOR = "#d9a038"
 OLD_APPLICATION_HOST = "infinite-hackathon.vercel.app"
 
 
@@ -41,31 +42,48 @@ class ApplicationLinkParser(HTMLParser):
 
 
 def decode_qr_svg(path: Path) -> str:
-    """Rasterize the generated SVG modules and return their decoded payload."""
+    """Validate and decode the transparent gold QR in its flyer presentation."""
     root = ET.parse(path).getroot()
     field = int(root.attrib["width"])
     scale = 12
-    pixels = np.full((field * scale, field * scale), 255, dtype=np.uint8)
+    pixels = np.zeros((field * scale, field * scale, 3), dtype=np.uint8)
 
     namespace = root.tag.partition("}")[0].lstrip("{")
     prefix = f"{{{namespace}}}" if namespace else ""
     group = root.find(f"{prefix}g")
     if group is None:
         raise AssertionError("application QR SVG has no module group")
+    if list(root) != [group]:
+        raise AssertionError("application QR SVG must contain only its module group")
+    if group.attrib.get("fill") != EXPECTED_QR_MODULE_COLOR:
+        raise AssertionError(
+            f"application QR modules must use {EXPECTED_QR_MODULE_COLOR}"
+        )
     transform = group.attrib.get("transform", "")
     match = re.fullmatch(r"translate\((\d+) (\d+)\)", transform)
     if not match:
         raise AssertionError(f"application QR has an unsupported transform: {transform}")
     offset_x, offset_y = map(int, match.groups())
+    expected_modules = len(cv2.QRCodeEncoder_create().encode(EXPECTED_APPLICATION_URL))
+    if offset_x != 4 or offset_y != 4 or field != expected_modules + 8:
+        raise AssertionError("application QR must retain a four-module quiet zone")
+
+    red, green, blue = (
+        int(EXPECTED_QR_MODULE_COLOR[index : index + 2], 16)
+        for index in (1, 3, 5)
+    )
 
     for rectangle in group.findall(f"{prefix}rect"):
         x = (int(rectangle.attrib["x"]) + offset_x) * scale
         y = (int(rectangle.attrib["y"]) + offset_y) * scale
         width = int(rectangle.attrib["width"]) * scale
         height = int(rectangle.attrib["height"]) * scale
-        pixels[y : y + height, x : x + width] = 0
+        pixels[y : y + height, x : x + width] = (blue, green, red)
 
-    decoded, points, _ = cv2.QRCodeDetector().detectAndDecode(pixels)
+    # OpenCV expects dark modules on a light field. Normalize the flyer's
+    # light-on-dark presentation just as an inversion-capable scanner does.
+    normalized = cv2.bitwise_not(pixels)
+    decoded, points, _ = cv2.QRCodeDetector().detectAndDecode(normalized)
     if points is None or not decoded:
         raise AssertionError("application QR code could not be decoded")
     return decoded

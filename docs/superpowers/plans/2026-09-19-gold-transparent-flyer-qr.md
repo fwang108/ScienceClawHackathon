@@ -39,7 +39,7 @@
 - Consumes: `APPLICATION_URL: str`, OpenCV QR matrix values, and the existing SVG `<g transform="translate(4 4)">` representation.
 - Produces: `QR_MODULE_COLOR = "#d9a038"`, `build_qr_svg() -> str`, and `decode_qr_svg(path: Path) -> str` with transparent/gold presentation checks.
 
-- [ ] **Step 1: Add failing presentation assertions**
+- [x] **Step 1: Add failing presentation assertions**
 
 In `scripts/verify_flyer_application.py`, inspect the SVG root children before decoding. Require that the root has exactly one element child, that child is the QR module group, the group fill is `#d9a038`, and the four-module translation and field dimensions leave exactly four modules on every edge. Rasterize on black using the parsed gold fill, invert the image for light-on-dark QR polarity, and decode the result.
 
@@ -63,7 +63,7 @@ PYTHONDONTWRITEBYTECODE=1 /home/fiona/miniconda3/bin/python scripts/verify_flyer
 
 Expected: FAIL because the current SVG contains a cream background rectangle and black modules.
 
-- [ ] **Step 2: Generate transparent gold SVG markup**
+- [x] **Step 2: Generate transparent gold SVG markup**
 
 In `scripts/build_social_flyer.py`, add:
 
@@ -79,7 +79,7 @@ f'  <g transform="translate(4 4)" fill="{QR_MODULE_COLOR}">{qr_row_runs(matrix)}
 
 Keep the existing `modules + 8` field dimensions so the transparent quiet zone stays four modules wide.
 
-- [ ] **Step 3: Regenerate flyer and published artifacts**
+- [x] **Step 3: Regenerate flyer and published artifacts**
 
 Run:
 
@@ -90,7 +90,7 @@ PYTHONDONTWRITEBYTECODE=1 /home/fiona/miniconda3/bin/python scripts/build_sponso
 
 Expected: both commands exit zero and rewrite the generated flyer and sponsor PDF outputs.
 
-- [ ] **Step 4: Verify focused behavior and generated parity**
+- [x] **Step 4: Verify focused behavior and generated parity**
 
 Run:
 
@@ -102,21 +102,29 @@ PYTHONDONTWRITEBYTECODE=1 /home/fiona/miniconda3/bin/python scripts/test_sponsor
 
 Expected: every verifier exits zero; the QR decodes to the canonical application URL; source/public flyer outputs are byte-identical; sponsor exports pass their content and geometry checks.
 
-- [ ] **Step 5: Run the complete repository regression suite**
+- [x] **Step 5: Run the complete repository regression suite**
 
 Run every tracked Python verifier/test under `scripts/`, plus JavaScript syntax checks and generated-file metadata checks:
 
 ```bash
-for test in scripts/test_*.py scripts/verify_*.py; do PYTHONDONTWRITEBYTECODE=1 /home/fiona/miniconda3/bin/python "$test"; done
+for test in scripts/test_*.py; do PYTHONDONTWRITEBYTECODE=1 /home/fiona/miniconda3/bin/python "$test"; done
+for verifier in scripts/verify_*.py; do
+  if [ "$verifier" = scripts/verify_pr1_swarm_refresh.py ]; then
+    PYTHONDONTWRITEBYTECODE=1 /home/fiona/miniconda3/bin/python "$verifier" \
+      --logo-source /home/fiona/LAMM/hackathon_fall26/logos/LOGO_LAMM_full_black.svg
+  else
+    PYTHONDONTWRITEBYTECODE=1 /home/fiona/miniconda3/bin/python "$verifier"
+  fi
+done
 node --check swarm/js/main.js
 node --check swarm/js/scene.js
 node --check swarm/js/tentacles.js
 file v2/assets/social/scienceclaw-hackathon-flyer-16x9.png
 pdfinfo v2/assets/social/scienceclaw-hackathon-flyer-16x9.pdf
-git diff --check
+git diff --check -- . ':(exclude)**/*.pdf'
 ```
 
-Expected: all commands exit zero; PNG is 1600 × 900; PDF has one 16:9 page; no whitespace errors are reported.
+Expected: all commands exit zero; PNG is 1600 × 900; PDF has one 16:9 page; no source-file whitespace errors are reported. Generated PDFs are excluded from the Git text-whitespace check because Chromium's binary cross-reference rows end in spaces.
 
 - [ ] **Step 6: Commit the implementation**
 
@@ -131,4 +139,3 @@ git add scripts/build_social_flyer.py scripts/verify_flyer_application.py \
   sponsor_pitches/exports/scienceclaw-sponsorship-opportunity.pdf
 git commit -m "feat: style flyer QR in transparent gold"
 ```
-

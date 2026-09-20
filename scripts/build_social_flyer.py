@@ -19,6 +19,7 @@ CAPTIONS_PATH = OUTPUT_DIR / "social-captions.md"
 PUBLIC_DIR = ROOT / "swarm"
 PUBLIC_SOCIAL_DIR = PUBLIC_DIR / "assets" / "social"
 APPLICATION_URL = "https://scienceclawhack.ai/apply.html"
+QR_MODULE_COLOR = "#d9a038"
 
 
 def qr_row_runs(matrix) -> str:
@@ -37,14 +38,13 @@ def qr_row_runs(matrix) -> str:
 
 
 def build_qr_svg() -> str:
-    """Create a crisp, high-contrast QR code with a four-module quiet zone."""
+    """Create a transparent gold QR code with a four-module quiet zone."""
     matrix = cv2.QRCodeEncoder_create().encode(APPLICATION_URL)
     modules = len(matrix)
     field = modules + 8
     return f'''<svg xmlns="http://www.w3.org/2000/svg" width="{field}" height="{field}"
   viewBox="0 0 {field} {field}" shape-rendering="crispEdges" role="img" aria-label="Application QR code">
-  <rect width="{field}" height="{field}" fill="#f7f2e6"/>
-  <g transform="translate(4 4)" fill="#020202">{qr_row_runs(matrix)}</g>
+  <g transform="translate(4 4)" fill="{QR_MODULE_COLOR}">{qr_row_runs(matrix)}</g>
 </svg>
 '''
 
