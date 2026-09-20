@@ -235,7 +235,6 @@ class ScienceClawRenderedIdentityTests(unittest.TestCase):
                           return {
                             boxes,
                             overlaps,
-                            scrollWidth: document.documentElement.scrollWidth,
                             headerBottom: header.bottom,
                             headerRight: header.right,
                             contentTop: content.top,

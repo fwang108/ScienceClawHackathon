@@ -391,11 +391,6 @@ body.no-webgl {
     grid-column: 2;
   }
 
-  .hero,
-  .apply-main {
-    padding-top: 12rem;
-  }
-
 }
 
 @media (min-width: 1241px) and (max-width: 1500px) {
@@ -641,9 +636,13 @@ body.no-webgl {
 }
 
 @media (max-width: 640px) {
-  .hero { padding-top: 13rem; }
-  .apply-main { padding: 13rem 1rem 3rem; }
+  .apply-main { padding: 7rem 1rem 3rem; }
   .apply-form__row { align-items: flex-start; flex-direction: column; }
+}
+
+@media (max-width: 480px) {
+  .hero { padding-top: 12rem; }
+  .apply-main { padding: 12rem 1rem 3rem; }
 }
 
 
