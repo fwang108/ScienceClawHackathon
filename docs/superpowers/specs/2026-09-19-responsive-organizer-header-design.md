@@ -25,8 +25,8 @@ The header grows vertically when the organizer region wraps. Homepage hero and a
 
 - The ScienceClaw identity and MIT identity must never intersect.
 - Organizer identities must not intersect each other.
-- Every identity must remain fully inside the viewport.
-- The header must not create horizontal document overflow.
+- Every header identity and the mobile action must remain fully inside the viewport.
+- Verification covers header/identity viewport bounds; unrelated pre-existing main-content document overflow is outside this task's scope.
 - The full wordmark text remains `ScienceClaw` at all widths.
 - Desktop layout above the existing responsive breakpoint remains visually unchanged.
 
@@ -43,12 +43,12 @@ No HTML restructuring or duplicated mobile markup is needed.
 
 ## Verification
 
-Add a browser regression test for both public pages at 280, 320, 375, 768, 1240, and desktop widths. At each width, assert:
+Add a browser regression test for both public pages at the narrow collision range, breakpoint edges, and desktop widths. At each width, assert:
 
 - ScienceClaw and MIT rectangles do not overlap.
 - Organizer rectangles do not overlap one another.
-- All identity rectangles stay within the viewport.
-- The document has no horizontal overflow.
+- Header identity and mobile-action rectangles stay within the viewport.
+- The rendered pincer and wordmark do not intersect the mobile action.
 - Main content begins below the fixed header at narrow widths.
 
 Run the complete existing identity and layout test suite after the focused regression passes.

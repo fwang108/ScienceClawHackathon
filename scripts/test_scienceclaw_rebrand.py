@@ -187,12 +187,12 @@ class ScienceClawRenderedIdentityTests(unittest.TestCase):
         self.assertEqual(page.locator(".dropbox-upload").count(), 0)
         page.close()
 
-    def test_shared_header_identities_wrap_without_overlap_or_overflow(self) -> None:
+    def test_shared_header_identities_keep_visible_wordmark_clear_of_action(self) -> None:
         pages = (
             (ROOT / "swarm" / "index.html", ".hero__meta"),
             (ROOT / "swarm" / "apply.html", ".apply-page__inner"),
         )
-        widths = (280, 320, 375, 768, 1240, 1440)
+        widths = (280, 308, 320, 375, 480, 481, 768, 1240, 1440)
 
         for path, content_selector in pages:
             for width in widths:
@@ -200,16 +200,19 @@ class ScienceClawRenderedIdentityTests(unittest.TestCase):
                     page = self.browser.new_page(
                         viewport={"width": width, "height": 900}
                     )
-                    page.goto(path.as_uri(), wait_until="domcontentloaded")
+                    page.goto(path.as_uri(), wait_until="load")
                     geometry = page.evaluate(
-                        """({ contentSelector }) => {
-                          const selectors = [
-                            '.identity--scienceclaw',
-                            '.identity--mit',
-                            '.identity--lamm',
-                            '.identity--e14'
-                          ];
-                          const boxes = selectors.map((selector) => {
+                        """async ({ contentSelector }) => {
+                          const settleImage = (image) => {
+                            if (image.complete) return Promise.resolve();
+                            return new Promise((resolve) => {
+                              image.addEventListener('load', resolve, { once: true });
+                              image.addEventListener('error', resolve, { once: true });
+                            });
+                          };
+                          await Promise.all([...document.images].map(settleImage));
+                          await document.fonts.ready;
+                          const boxFor = (selector) => {
                             const rect = document.querySelector(selector).getBoundingClientRect();
                             return {
                               selector,
@@ -218,7 +221,14 @@ class ScienceClawRenderedIdentityTests(unittest.TestCase):
                               top: rect.top,
                               bottom: rect.bottom
                             };
-                          });
+                          };
+                          const selectors = [
+                            '.identity--scienceclaw',
+                            '.identity--mit',
+                            '.identity--lamm',
+                            '.identity--e14'
+                          ];
+                          const boxes = selectors.map(boxFor);
                           const intersects = (a, b) =>
                             a.left < b.right && a.right > b.left &&
                             a.top < b.bottom && a.bottom > b.top;
@@ -230,11 +240,21 @@ class ScienceClawRenderedIdentityTests(unittest.TestCase):
                               }
                             }
                           }
+                          const mobileAction = boxFor('.nav__mobile-action');
+                          const visibleWordmark = [
+                            boxFor('.identity__scienceclaw-mark'),
+                            boxFor('.identity__scienceclaw-word')
+                          ];
                           const header = document.querySelector('.nav').getBoundingClientRect();
                           const content = document.querySelector(contentSelector).getBoundingClientRect();
                           return {
                             boxes,
                             overlaps,
+                            mobileAction,
+                            visibleWordmark,
+                            wordmarkActionOverlaps: visibleWordmark
+                              .filter((box) => intersects(box, mobileAction))
+                              .map((box) => box.selector),
                             headerBottom: header.bottom,
                             headerRight: header.right,
                             contentTop: content.top,
@@ -247,6 +267,8 @@ class ScienceClawRenderedIdentityTests(unittest.TestCase):
 
                     self.assertEqual(geometry["wordmark"], "ScienceClaw")
                     self.assertEqual(geometry["overlaps"], [])
+                    if width <= 1240:
+                        self.assertEqual(geometry["wordmarkActionOverlaps"], [], geometry)
                     self.assertLessEqual(geometry["headerRight"], width)
                     for box in geometry["boxes"]:
                         self.assertGreaterEqual(box["left"], 0, box)
