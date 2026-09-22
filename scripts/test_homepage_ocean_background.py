@@ -134,6 +134,36 @@ class HomepageOceanRuntimeTests(unittest.TestCase):
         finally:
             context.close()
 
+    def test_hero_title_stays_visible_after_compact_resize(self) -> None:
+        page = self.browser.new_page(viewport={"width": 1440, "height": 900})
+        try:
+            page.goto(self.base_url, wait_until="networkidle")
+            for width in (375, 280):
+                with self.subTest(width=width):
+                    page.set_viewport_size({"width": width, "height": 300})
+                    geometry = page.evaluate(
+                        """() => {
+                          const nav = document.querySelector('.nav').getBoundingClientRect();
+                          const title = document.querySelector('.hero__title').getBoundingClientRect();
+                          return {
+                            navBottom: nav.bottom,
+                            titleTop: title.top,
+                            titleBottom: title.bottom,
+                            viewportHeight: window.innerHeight
+                          };
+                        }"""
+                    )
+                    visible_top = max(
+                        geometry["navBottom"], geometry["titleTop"], 0
+                    )
+                    visible_bottom = min(
+                        geometry["titleBottom"], geometry["viewportHeight"]
+                    )
+                    visible_height = max(0, visible_bottom - visible_top)
+                    self.assertGreaterEqual(visible_height, 48)
+        finally:
+            page.close()
+
     def test_webgl_failure_activates_static_fallback(self) -> None:
         context = self.browser.new_context()
         page = context.new_page()
