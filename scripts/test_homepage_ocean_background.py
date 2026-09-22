@@ -144,9 +144,18 @@ class HomepageOceanRuntimeTests(unittest.TestCase):
                     geometry = page.evaluate(
                         """() => {
                           const nav = document.querySelector('.nav').getBoundingClientRect();
+                          const wordmark = document.querySelector(
+                            '.identity__scienceclaw-logo'
+                          ).getBoundingClientRect();
+                          const action = document.querySelector(
+                            '.nav__mobile-action'
+                          ).getBoundingClientRect();
                           const title = document.querySelector('.hero__title').getBoundingClientRect();
                           return {
                             navBottom: nav.bottom,
+                            wordmarkWidth: wordmark.width,
+                            wordmarkRight: wordmark.right,
+                            actionLeft: action.left,
                             titleTop: title.top,
                             titleBottom: title.bottom,
                             viewportHeight: window.innerHeight
@@ -160,6 +169,10 @@ class HomepageOceanRuntimeTests(unittest.TestCase):
                         geometry["titleBottom"], geometry["viewportHeight"]
                     )
                     visible_height = max(0, visible_bottom - visible_top)
+                    self.assertGreaterEqual(geometry["wordmarkWidth"], 140)
+                    self.assertLessEqual(
+                        geometry["wordmarkRight"] + 8, geometry["actionLeft"]
+                    )
                     self.assertGreaterEqual(visible_height, 48)
         finally:
             page.close()

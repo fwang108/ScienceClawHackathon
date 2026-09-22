@@ -144,7 +144,7 @@ body.no-webgl {
   justify-content: flex-start;
 }
 
-.identity__scienceclaw-logo {
+.identity--scienceclaw .identity__scienceclaw-logo {
   display: block;
   width: 176px;
   max-width: 100%;
@@ -317,7 +317,7 @@ body.no-webgl {
     height: 30px;
   }
 
-  .identity__scienceclaw-logo { width: 152px; }
+  .identity--scienceclaw .identity__scienceclaw-logo { width: 152px; }
 
   .identity__scienceclaw-word {
     font-size: 0.78rem;
