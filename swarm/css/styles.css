@@ -144,6 +144,14 @@ body.no-webgl {
   justify-content: flex-start;
 }
 
+.identity__scienceclaw-logo {
+  display: block;
+  width: 176px;
+  max-width: 100%;
+  height: auto;
+  max-height: 44px;
+}
+
 .identity__institutions {
   min-width: 0;
   display: flex;
@@ -309,6 +317,8 @@ body.no-webgl {
     height: 30px;
   }
 
+  .identity__scienceclaw-logo { width: 152px; }
+
   .identity__scienceclaw-word {
     font-size: 0.78rem;
     letter-spacing: 0.2em;
@@ -450,13 +460,13 @@ body.no-webgl {
   box-shadow: 0 0 12px var(--accent);
 }
 
-.hero__claw {
+.hero__official-mark {
   display: block;
   width: clamp(82px, 8vw, 120px);
   height: auto;
   margin-bottom: 0.55rem;
   animation: scienceclaw-float 3.2s ease-in-out infinite;
-  filter: drop-shadow(0 0 16px rgba(217, 160, 56, 0.28));
+  filter: invert(1) drop-shadow(0 0 16px rgba(217, 160, 56, 0.28));
 }
 
 .hero__title {
@@ -1063,7 +1073,7 @@ body.no-webgl {
 /* ---------- Responsive ---------- */
 
 @media (max-width: 820px) {
-  .hero__claw { width: 76px; margin-bottom: 0.35rem; }
+  .hero__official-mark { width: 76px; margin-bottom: 0.35rem; }
   .hero__stats { gap: 1.6rem; flex-wrap: wrap; justify-content: center; }
   .track { grid-template-columns: 1fr; gap: 0.4rem; }
   .rubric__row { grid-template-columns: 1fr; gap: 0.9rem; }
@@ -1074,6 +1084,6 @@ body.no-webgl {
 
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; transform: none; transition: none; }
-  .ticker__track, .grain, .hero__scrollcue span, .identity__scienceclaw-mark, .hero__claw { animation: none; }
+  .ticker__track, .grain, .hero__scrollcue span, .identity__scienceclaw-mark, .hero__official-mark { animation: none; }
   html { scroll-behavior: auto; }
 }

@@ -122,15 +122,19 @@ class ScienceClawRenderedIdentityTests(unittest.TestCase):
 
     def test_public_wordmarks_use_full_scienceclaw_name(self) -> None:
         wordmarks = (
-            (ROOT / "swarm" / "index.html", ".identity__scienceclaw-word"),
-            (ROOT / "swarm" / "apply.html", ".identity__scienceclaw-word"),
-            (ROOT / "swarm" / "flyer.html", ".brand__name"),
+            (ROOT / "swarm" / "index.html", ".identity__scienceclaw-logo", "alt"),
+            (ROOT / "swarm" / "apply.html", ".identity__scienceclaw-word", None),
+            (ROOT / "swarm" / "flyer.html", ".brand__name", None),
         )
-        for path, selector in wordmarks:
+        for path, selector, attribute in wordmarks:
             with self.subTest(page=path.relative_to(ROOT)):
                 page = self.browser.new_page()
                 page.goto(path.as_uri(), wait_until="domcontentloaded")
-                wordmark = page.locator(selector).inner_text()
+                locator = page.locator(selector)
+                self.assertEqual(locator.count(), 1)
+                wordmark = (
+                    locator.get_attribute(attribute) if attribute else locator.inner_text()
+                )
                 page.close()
                 self.assertEqual(wordmark, "ScienceClaw")
 
@@ -227,8 +231,8 @@ class ScienceClawRenderedIdentityTests(unittest.TestCase):
                           };
                           await Promise.all([...document.images].map(settleImage));
                           await document.fonts.ready;
-                          const boxFor = (selector) => {
-                            const rect = document.querySelector(selector).getBoundingClientRect();
+                          const boxForElement = (element, selector) => {
+                            const rect = element.getBoundingClientRect();
                             return {
                               selector,
                               left: rect.left,
@@ -237,6 +241,8 @@ class ScienceClawRenderedIdentityTests(unittest.TestCase):
                               bottom: rect.bottom
                             };
                           };
+                          const boxFor = (selector) =>
+                            boxForElement(document.querySelector(selector), selector);
                           const selectors = [
                             '.identity--scienceclaw',
                             '.identity--mit',
@@ -257,9 +263,17 @@ class ScienceClawRenderedIdentityTests(unittest.TestCase):
                           }
                           const mobileAction = boxFor('.nav__mobile-action');
                           const visibleWordmark = [
-                            boxFor('.identity__scienceclaw-mark'),
-                            boxFor('.identity__scienceclaw-word')
-                          ];
+                            ...document.querySelector(".identity--scienceclaw").children
+                          ].filter((element) => {
+                            const style = getComputedStyle(element);
+                            const rect = element.getBoundingClientRect();
+                            return style.display !== "none" &&
+                              style.visibility !== "hidden" &&
+                              rect.width > 0 && rect.height > 0;
+                          }).map((element, index) => boxForElement(
+                            element,
+                            `.identity--scienceclaw > :nth-child(${index + 1})`
+                          ));
                           const mitImage = boxFor('.identity--mit img');
                           const header = document.querySelector('.nav').getBoundingClientRect();
                           const content = document.querySelector(contentSelector).getBoundingClientRect();
@@ -277,7 +291,14 @@ class ScienceClawRenderedIdentityTests(unittest.TestCase):
                             headerBottom: header.bottom,
                             headerRight: header.right,
                             contentTop: content.top,
-                            wordmark: document.querySelector('.identity__scienceclaw-word').textContent.trim()
+                            wordmark: (() => {
+                              const element = document.querySelector(
+                                ".identity__scienceclaw-logo, .identity__scienceclaw-word"
+                              );
+                              return element instanceof HTMLImageElement
+                                ? element.alt.trim()
+                                : element.textContent.trim();
+                            })()
                           };
                         }""",
                         {"contentSelector": content_selector},
