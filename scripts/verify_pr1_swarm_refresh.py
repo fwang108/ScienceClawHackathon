@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Verify that PR #1 contains the approved upstream Swarm model."""
+"""Verify that PR #1 contains the approved upstream ocean scene."""
 
 from __future__ import annotations
 
@@ -11,13 +11,13 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-MODEL = ROOT / "swarm" / "js" / "scene.js"
+MODEL = ROOT / "swarm" / "js" / "scene-ocean.js"
 INDEX = ROOT / "swarm" / "index.html"
 APPLY = ROOT / "swarm" / "apply.html"
 STYLES = ROOT / "swarm" / "css" / "styles.css"
 LOGO = ROOT / "swarm" / "assets" / "logos" / "LOGO_LAMM_full_black.svg"
 EXPECTED_MODEL_SHA256 = (
-    "6a5bbfe9dcbe2210fb803e3595978b9bd2a54695ae4d195a077bad560967e19b"
+    "9112c12f37776ab12806faf75613561ba6faee2340a50d8548c9fff5140dbde2"
 )
 
 
@@ -27,11 +27,11 @@ def sha256(path: Path) -> str:
 
 def verify_model() -> None:
     if not MODEL.is_file():
-        raise AssertionError(f"missing upstream Swarm model: {MODEL.relative_to(ROOT)}")
+        raise AssertionError(f"missing approved ocean scene: {MODEL.relative_to(ROOT)}")
     actual = sha256(MODEL)
     if actual != EXPECTED_MODEL_SHA256:
         raise AssertionError(
-            "Swarm model differs from approved upstream source: "
+            "approved ocean scene differs from upstream source: "
             f"expected {EXPECTED_MODEL_SHA256}, got {actual}"
         )
 

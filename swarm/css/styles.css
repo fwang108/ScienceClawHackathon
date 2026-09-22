@@ -62,17 +62,6 @@ body {
   80% { transform: translate(4%,4%); }
 }
 
-/* stenciled cybernetic anemone tentacles (left/right edges) */
-.tentacle-layer {
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 2;
-  pointer-events: none;
-  opacity: 0.9;
-}
-
 main {
   position: relative;
   z-index: 3;
