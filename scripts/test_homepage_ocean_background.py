@@ -4,8 +4,13 @@ from __future__ import annotations
 
 import hashlib
 import unittest
+from functools import partial
 from html.parser import HTMLParser
+from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
+from threading import Thread
+
+from playwright.sync_api import sync_playwright
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -77,6 +82,80 @@ class HomepageOfficialLogoTests(unittest.TestCase):
         self.assertNotIn("scienceclaw-wordmark-white.svg", application)
         self.assertNotIn("scienceclaw-mark-official.svg", application)
         self.assertEqual(sha256(APPLY), EXPECTED_APPLY_SHA256)
+
+
+class QuietHandler(SimpleHTTPRequestHandler):
+    def log_message(self, format: str, *args: object) -> None:
+        pass
+
+
+class HomepageOceanRuntimeTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls) -> None:
+        handler = partial(QuietHandler, directory=str(SWARM))
+        cls.server = ThreadingHTTPServer(("127.0.0.1", 0), handler)
+        cls.thread = Thread(target=cls.server.serve_forever, daemon=True)
+        cls.thread.start()
+        cls.base_url = f"http://127.0.0.1:{cls.server.server_port}/"
+        cls.playwright = sync_playwright().start()
+        cls.browser = cls.playwright.chromium.launch()
+
+    @classmethod
+    def tearDownClass(cls) -> None:
+        cls.browser.close()
+        cls.playwright.stop()
+        cls.server.shutdown()
+        cls.server.server_close()
+        cls.thread.join(timeout=5)
+
+    def test_reduced_motion_renders_one_static_ocean_frame(self) -> None:
+        context = self.browser.new_context(reduced_motion="reduce")
+        page = context.new_page()
+        page_errors: list[str] = []
+        page.on("pageerror", lambda error: page_errors.append(str(error)))
+        page.add_init_script(
+            """
+            window.__rafCalls = 0;
+            const original = window.requestAnimationFrame.bind(window);
+            window.requestAnimationFrame = (callback) => {
+              window.__rafCalls += 1;
+              return original(callback);
+            };
+            """
+        )
+        try:
+            page.goto(self.base_url, wait_until="networkidle")
+            page.wait_for_timeout(500)
+            self.assertEqual(page.evaluate("window.__rafCalls"), 0)
+            self.assertGreater(
+                page.locator("#scene").evaluate("canvas => canvas.width"), 0
+            )
+            self.assertEqual(page_errors, [])
+        finally:
+            context.close()
+
+    def test_webgl_failure_activates_static_fallback(self) -> None:
+        context = self.browser.new_context()
+        page = context.new_page()
+        page.add_init_script(
+            """
+            const original = HTMLCanvasElement.prototype.getContext;
+            HTMLCanvasElement.prototype.getContext = function(type, ...args) {
+              if (["webgl", "webgl2", "experimental-webgl"].includes(type)) {
+                return null;
+              }
+              return original.call(this, type, ...args);
+            };
+            """
+        )
+        try:
+            page.goto(self.base_url, wait_until="domcontentloaded")
+            page.wait_for_function("document.body.classList.contains(\"no-webgl\")")
+            self.assertTrue(
+                page.evaluate("document.body.classList.contains(\"no-webgl\")")
+            )
+        finally:
+            context.close()
 
 
 if __name__ == "__main__":
