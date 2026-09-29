@@ -62,6 +62,17 @@ body {
   80% { transform: translate(4%,4%); }
 }
 
+/* stenciled cybernetic anemone tentacles (left/right edges) */
+.tentacle-layer {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.9;
+}
+
 main {
   position: relative;
   z-index: 3;
@@ -460,13 +471,13 @@ body.no-webgl {
   box-shadow: 0 0 12px var(--accent);
 }
 
-.hero__official-mark {
+.hero__claw {
   display: block;
   width: clamp(82px, 8vw, 120px);
   height: auto;
   margin-bottom: 0.55rem;
   animation: scienceclaw-float 3.2s ease-in-out infinite;
-  filter: invert(1) drop-shadow(0 0 16px rgba(217, 160, 56, 0.28));
+  filter: drop-shadow(0 0 16px rgba(217, 160, 56, 0.28));
 }
 
 .hero__title {
@@ -588,6 +599,55 @@ body.no-webgl {
   font-size: 0.98rem;
   line-height: 1.6;
 }
+
+.team-registration {
+  display: grid;
+  gap: 1rem;
+  padding: 1.4rem;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: rgba(247, 242, 230, 0.025);
+}
+
+.team-registration__heading,
+.team-registration__controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.team-registration__heading { flex-wrap: wrap; }
+.team-registration__title { margin-bottom: 0.45rem; font-size: 1.35rem; }
+.team-registration__controls { flex-wrap: wrap; }
+.team-registration__controls .btn { padding: 0.7rem 1rem; }
+.team-registration__controls .btn:disabled { opacity: 0.55; cursor: not-allowed; }
+
+.team-member {
+  min-width: 0;
+  display: grid;
+  gap: 1rem;
+  padding: 1.2rem;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+
+.team-member__remove {
+  justify-self: end;
+  padding: 0.2rem 0;
+  border: 0;
+  background: none;
+  color: var(--accent-soft);
+  font: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.team-member__remove:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
 .field input:focus,
 .field select:focus,
 .field textarea:focus {
@@ -643,6 +703,9 @@ body.no-webgl {
 @media (max-width: 640px) {
   .apply-main { padding: 7rem 1rem 3rem; }
   .apply-form__row { align-items: flex-start; flex-direction: column; }
+  .team-registration { padding: 1rem; }
+  .team-registration__controls { align-items: flex-start; flex-direction: column; }
+  .team-member { padding: 1rem; }
 }
 
 @media (max-width: 480px) {
@@ -818,6 +881,37 @@ body.no-webgl {
   color: var(--ink-faint);
   border-left: 2px solid var(--accent);
   padding-left: 1.1rem;
+}
+
+.section.community-partner {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+.community-partner .section__head { margin-bottom: 1.5rem; }
+
+.community-partner__card {
+  display: flex;
+  justify-content: center;
+  width: min(100%, 22rem);
+  margin-inline: auto;
+}
+
+.community-partner__link {
+  display: block;
+  border-radius: 8px;
+}
+
+.community-partner__link img {
+  display: block;
+  width: clamp(6rem, 12vw, 7.5rem);
+  height: auto;
+  object-fit: contain;
+}
+
+.community-partner__link:focus-visible {
+  outline: 2px solid var(--accent-soft);
+  outline-offset: 6px;
 }
 
 /* ---------- Cards (Format) ---------- */
@@ -1073,7 +1167,7 @@ body.no-webgl {
 /* ---------- Responsive ---------- */
 
 @media (max-width: 820px) {
-  .hero__official-mark { width: 76px; margin-bottom: 0.35rem; }
+  .hero__claw { width: 76px; margin-bottom: 0.35rem; }
   .hero__stats { gap: 1.6rem; flex-wrap: wrap; justify-content: center; }
   .track { grid-template-columns: 1fr; gap: 0.4rem; }
   .rubric__row { grid-template-columns: 1fr; gap: 0.9rem; }
@@ -1084,11 +1178,11 @@ body.no-webgl {
 
 @media (max-width: 480px) and (max-height: 500px) {
   .hero { padding-top: 7rem; }
-  .hero__official-mark { width: 52px; }
+  .hero__claw { width: 52px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; transform: none; transition: none; }
-  .ticker__track, .grain, .hero__scrollcue span, .identity__scienceclaw-mark, .hero__official-mark { animation: none; }
+  .ticker__track, .grain, .hero__scrollcue span, .identity__scienceclaw-mark, .hero__claw { animation: none; }
   html { scroll-behavior: auto; }
 }

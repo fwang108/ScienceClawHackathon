@@ -6,10 +6,10 @@
   <title>Apply — ScienceClaw · The Internet of Agents Hackathon</title>
   <meta name="description" content="Apply to the ScienceClaw hackathon. MIT Media Lab, Oct 30 – Nov 1, 2026." />
   <link rel="canonical" href="https://scienceclawhack.ai/apply.html" />
-  <link rel="icon" type="image/svg+xml" href="assets/logos/scienceclaw-favicon.svg?v=3" />
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/logos/scienceclaw-favicon-32.png?v=3" />
-  <link rel="icon" type="image/x-icon" href="assets/logos/favicon.ico?v=3" />
-  <link rel="apple-touch-icon" sizes="180x180" href="assets/logos/apple-touch-icon.png?v=3" />
+  <link rel="icon" type="image/svg+xml" href="assets/logos/scienceclaw-favicon.svg?v=7" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/logos/scienceclaw-favicon-32.png?v=7" />
+  <link rel="icon" type="image/x-icon" href="assets/logos/favicon.ico?v=7" />
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/logos/apple-touch-icon.png?v=7" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,opsz,wght@0,6..12,300;0,6..12,400;0,6..12,600;1,6..12,300;1,6..12,400&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet" />
@@ -53,7 +53,7 @@
     <section class="apply-page__inner">
       <span class="apply__kicker">ScienceClaw · Oct 30 – Nov 1, 2026 · MIT Media Lab</span>
       <h1 class="apply-page__title">Apply to build</h1>
-      <p class="apply-page__sub">Teams of 2–5. Tell us what you want to make and we'll get back to you.</p>
+      <p class="apply-page__sub">Apply individually or register your existing team of 2–5. Add up to four teammates below.</p>
 
       <form class="apply-form" id="app-form" action="https://formspree.io/f/mljeldnn" method="POST">
         <input type="hidden" name="_subject" value="New ScienceClaw Hackathon application" />
@@ -114,6 +114,40 @@
             <label class="field"><span class="field__label">LinkedIn</span><input name="linkedin" type="url" placeholder="https://linkedin.com/in/" /></label>
             <label class="field"><span class="field__label">Instagram</span><input name="instagram" type="url" placeholder="https://instagram.com/" /></label>
           </div>
+
+          <div class="team-registration" aria-labelledby="team-registration-title">
+            <div class="team-registration__heading">
+              <div>
+                <h3 class="team-registration__title" id="team-registration-title">Register teammates</h3>
+                <p class="field__hint">Optional. Add up to four people in addition to yourself. Enter each teammate’s name and email.</p>
+              </div>
+              <div class="team-registration__controls">
+                <span class="field__hint" id="team-member-count" role="status" aria-live="polite">0 teammates added</span>
+                <button class="btn btn--ghost" id="add-team-member" type="button">Add teammate</button>
+              </div>
+            </div>
+            <div class="team-members" id="team-members"></div>
+            <template id="team-member-template">
+              <fieldset class="team-member">
+                <legend class="field__label">Teammate __INDEX__</legend>
+                <button class="team-member__remove" type="button" aria-label="Remove teammate __INDEX__">Remove</button>
+                <div class="apply-form__grid">
+                  <label class="field">
+                    <span class="field__label">First name <b>*</b></span>
+                    <input name="team_member___INDEX___first_name" type="text" autocomplete="given-name" required />
+                  </label>
+                  <label class="field">
+                    <span class="field__label">Last name <b>*</b></span>
+                    <input name="team_member___INDEX___last_name" type="text" autocomplete="family-name" required />
+                  </label>
+                  <label class="field field--full">
+                    <span class="field__label">Email <b>*</b></span>
+                    <input name="team_member___INDEX___email" type="email" autocomplete="email" required />
+                  </label>
+                </div>
+              </fieldset>
+            </template>
+          </div>
         </section>
 
         <section class="apply-form__section" aria-labelledby="problem-heading">
@@ -168,11 +202,10 @@
           </label>
         </section>
 
-        <section class="apply-form__section" aria-labelledby="consent-heading">
-          <h2 class="apply-form__section-title" id="consent-heading">Consent</h2>
-          <p class="apply-form__section-note">We will share personal information.</p>
+        <section class="apply-form__section" aria-labelledby="opt-in-heading">
+          <h2 class="apply-form__section-title" id="opt-in-heading">Opt In</h2>
           <fieldset class="question-group">
-            <legend class="field__label">May we share your personal information? <b>*</b></legend>
+            <legend class="field__label">I agree to be added to the event directory, which may be shared with the event sponsors <b>*</b></legend>
             <div class="apply-form__choices">
               <label class="chk"><input type="radio" name="public_sharing_consent" value="Yes" required /><span>Yes</span></label>
               <label class="chk"><input type="radio" name="public_sharing_consent" value="No" /><span>No</span></label>
@@ -198,7 +231,7 @@
     <span>ScienceClaw · Oct 30 – Nov 1, 2026 · MIT Media Lab</span>
     <span>The Internet of Agents</span>
     <nav class="footer__compliance" aria-label="Site information">
-      <span>Contact: <a href="mailto:fw2@mit.edu">fw2@mit.edu</a></span>
+      <span>Contact: <a href="mailto:scienceclaw@mit.edu">scienceclaw@mit.edu</a></span>
       <a href="https://accessibility.mit.edu/">Accessibility</a>
     </nav>
   </footer>
@@ -213,6 +246,54 @@
     const expertiseOtherChoice = document.getElementById("expertise-other-choice");
     const expertiseOther = document.getElementById("expertise-other");
     const expertiseChoices = [...form.querySelectorAll("input[name=expertise]")];
+    const teamMembers = document.getElementById("team-members");
+    const teamMemberTemplate = document.getElementById("team-member-template");
+    const addTeamMemberButton = document.getElementById("add-team-member");
+    const teamMemberCount = document.getElementById("team-member-count");
+    const maxTeamMembers = 4;
+
+    const renumberTeamMembers = () => {
+      const members = [...teamMembers.querySelectorAll(".team-member")];
+      members.forEach((member, index) => {
+        const memberNumber = index + 1;
+        member.querySelector("legend").textContent = `Teammate ${memberNumber}`;
+        member.querySelectorAll("[name]").forEach((input) => {
+          input.name = input.name.replace(/team_member_\d+_/, `team_member_${memberNumber}_`);
+        });
+        member.querySelector(".team-member__remove").setAttribute(
+          "aria-label",
+          `Remove teammate ${memberNumber}`
+        );
+      });
+
+      addTeamMemberButton.disabled = members.length >= maxTeamMembers;
+      teamMemberCount.textContent = `${members.length} teammate${members.length === 1 ? "" : "s"} added`;
+    };
+
+    addTeamMemberButton.addEventListener("click", () => {
+      if (teamMembers.querySelectorAll(".team-member").length >= maxTeamMembers) return;
+
+      const member = teamMemberTemplate.content.firstElementChild.cloneNode(true);
+      const memberNumber = teamMembers.querySelectorAll(".team-member").length + 1;
+      member.querySelector("legend").textContent = `Teammate ${memberNumber}`;
+      member.querySelectorAll("[name]").forEach((input) => {
+        input.name = input.name.replaceAll("__INDEX__", memberNumber);
+      });
+      member.querySelector(".team-member__remove").setAttribute(
+        "aria-label",
+        `Remove teammate ${memberNumber}`
+      );
+      teamMembers.append(member);
+      renumberTeamMembers();
+      member.querySelector('input[name$="first_name"]').focus();
+    });
+
+    teamMembers.addEventListener("click", (event) => {
+      if (!event.target.closest(".team-member__remove")) return;
+      event.target.closest(".team-member").remove();
+      renumberTeamMembers();
+      addTeamMemberButton.focus();
+    });
 
     const updateOtherRequirements = () => {
       institutionOther.required = institutionOtherChoice.checked;
