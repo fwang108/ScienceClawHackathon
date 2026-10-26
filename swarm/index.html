@@ -12,8 +12,8 @@
   <link rel="apple-touch-icon" sizes="180x180" href="assets/logos/apple-touch-icon.png?v=7" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,opsz,wght@0,6..12,300;0,6..12,400;0,6..12,600;1,6..12,300;1,6..12,400&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,opsz,wght@0,6..12,300;0,6..12,400;0,6..12,600;1,6..12,300;1,6..12,400&family=DM+Serif+Display&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css?v=20261026-builder-logo-narrower" />
   <script type="importmap">
     {
       "imports": {
@@ -38,10 +38,6 @@
         <span class="identity__scienceclaw-word">ScienceClaw</span>
       </a>
       <div class="identity__institutions">
-        <a class="identity identity--mit" href="https://www.mit.edu/" target="_blank"
-          rel="noopener noreferrer" aria-label="Visit the MIT website">
-          <img src="assets/logos/mit-lockup.svg" alt="Massachusetts Institute of Technology" />
-        </a>
         <a class="identity identity--lamm" href="https://lamm.mit.edu/" target="_blank"
           rel="noopener noreferrer" aria-label="Visit the LAMM website">
           <img class="identity__lamm-logo" src="assets/logos/LOGO_LAMM_full_black.svg"
@@ -52,18 +48,20 @@
           <img src="assets/logos/e14-logo.svg" alt="E14 Fund" />
         </a>
       </div>
-      <a class="nav__mobile-action" href="apply.html">Apply</a>
+      <a class="nav__mobile-action luma-checkout--button" href="https://luma.com/event/evt-lrhAXSeA3Dq8uSI" data-luma-action="checkout" data-luma-event-id="evt-lrhAXSeA3Dq8uSI">Apply</a>
     </div>
     <div class="nav__bar">
       <span class="nav__date">Oct 30 – Nov 1, 2026</span>
       <nav class="nav__links" aria-label="Main navigation">
-        <a href="#purpose">Purpose</a>
-        <a href="#challenge">Challenge</a>
-        <a href="#resources">Resources</a>
-        <a href="#areas">Areas</a>
-        <a href="#judging">Judging</a>
+        <a href="#overview">Overview</a>
+        <a href="#build">Build</a>
+        <a href="#competition">Competition</a>
+        <a href="#schedule">Schedule</a>
+        <a href="#community">Community</a>
+        <a href="#sponsors">Sponsors</a>
+        <a href="#faq">FAQ</a>
       </nav>
-      <a class="nav__cta" href="apply.html">Apply</a>
+      <a class="nav__cta luma-checkout--button" href="https://luma.com/event/evt-lrhAXSeA3Dq8uSI" data-luma-action="checkout" data-luma-event-id="evt-lrhAXSeA3Dq8uSI">Apply</a>
     </div>
   </header>
 
@@ -82,9 +80,10 @@
         <span class="hero__line hero__line--subtitle">A hackathon for building decentralized collectives of AI agents that solve real scientific and technical problems.</span>
       </h1>
       <div class="hero__actions">
-        <a class="btn btn--solid" href="apply.html">Apply</a>
-        <a class="btn btn--ghost" href="#purpose">Read the brief</a>
+        <a class="btn btn--solid luma-checkout--button" href="https://luma.com/event/evt-lrhAXSeA3Dq8uSI" data-luma-action="checkout" data-luma-event-id="evt-lrhAXSeA3Dq8uSI">Apply</a>
+        <a class="btn btn--ghost" href="#overview">Read the brief</a>
       </div>
+      <p class="hero__deadline">Final application deadline: <strong>October 26, 2026</strong></p>
       <div class="hero__stats">
         <div class="stat"><span class="stat__k">3 days</span><span class="stat__v">In-person</span></div>
         <div class="stat"><span class="stat__k">2–5</span><span class="stat__v">Per team</span></div>
@@ -103,75 +102,77 @@
     </div>
 
     <!-- PURPOSE -->
-    <section class="section" id="purpose">
+    <section class="section" id="overview">
       <div class="section__head reveal">
         <span class="section__index">01</span>
-        <h2 class="section__title">Purpose</h2>
+        <h2 class="section__title">Overview</h2>
       </div>
+      <div class="section__group" id="purpose" aria-labelledby="purpose-title">
+        <div class="section__subhead reveal"><h3 class="section__subtitle" id="purpose-title">Purpose</h4></div>
       <div class="section__body">
         <p class="lede reveal">
           ScienceClaw explores when decentralized collective intelligence can produce capabilities beyond a single agent or conventional workflow.
         </p>
         <p class="reveal">
-          Teams build working collectives of specialized agents, models, simulations, robots, sensors, and laboratory tools. Different members of the collective can hold distinct knowledge and capabilities, coordinate and adapt, and leave traceable scientific artifacts, provenance, findings, and unmet needs that the collective can build upon—without requiring one central planner to prescribe the entire process.
+          Teams build working collectives of specialized agents, models, simulations, sensors, and laboratory tools. Different members of the collective can hold distinct knowledge and capabilities, coordinate and adapt, and leave traceable scientific artifacts, provenance, findings, and unmet needs that the collective can build upon—without requiring one central planner to prescribe the entire process.
         </p>
       </div>
-    </section>
+      </div>
 
     <!-- CHALLENGE -->
-    <section class="section" id="challenge">
-      <div class="section__head reveal">
-        <span class="section__index">02</span>
-        <h2 class="section__title">Challenge</h2>
-      </div>
+      <div class="section__group" id="challenge" aria-labelledby="challenge-title">
+        <div class="section__subhead reveal"><h3 class="section__subtitle" id="challenge-title">Challenge</h4></div>
       <div class="section__body">
         <p class="lede reveal">
           Teams identify a difficult scientific or technical problem and build a functioning agentic system to
           address it. Each project should demonstrate:
         </p>
         <div class="card-grid">
-          <div class="card reveal"><span class="card__num">→</span><h3>Problem</h3><p>Identify a difficult, open-ended, consequential scientific or technical challenge.</p></div>
-          <div class="card reveal"><span class="card__num">→</span><h3>Functioning System</h3><p>Build a working agentic system — not just a concept or architecture.</p></div>
-          <div class="card reveal"><span class="card__num">→</span><h3>Result</h3><p>Demonstrate what the system actually accomplishes.</p></div>
-          <div class="card reveal"><span class="card__num">→</span><h3>Validation</h3><p>Provide convincing evidence, benchmarks, or real-world validation.</p></div>
+          <div class="card reveal"><span class="card__num">→</span><h4>Problem</h4><p>Identify a difficult, open-ended, consequential scientific or technical challenge.</p></div>
+          <div class="card reveal"><span class="card__num">→</span><h4>Functioning System</h4><p>Build a working agentic system — not just a concept or architecture.</p></div>
+          <div class="card reveal"><span class="card__num">→</span><h4>Result</h4><p>Demonstrate what the system actually accomplishes.</p></div>
+          <div class="card reveal"><span class="card__num">→</span><h4>Validation</h4><p>Provide convincing evidence, benchmarks, or real-world validation.</p></div>
         </div>
         <p class="reveal">
           The goal is not simply to propose an idea or agent architecture, but to demonstrate a working system
           and what it can accomplish.
         </p>
       </div>
+      </div>
     </section>
 
     <!-- RESOURCES -->
-    <section class="section" id="resources">
+    <section class="section" id="build">
       <div class="section__head reveal">
-        <span class="section__index">03</span>
-        <h2 class="section__title">Resources & Technology</h2>
+        <span class="section__index">02</span>
+        <h2 class="section__title">Build</h2>
       </div>
+      <div class="section__group" id="resources" aria-labelledby="resources-title">
+        <div class="section__subhead reveal"><h3 class="section__subtitle" id="resources-title">Resources & Technology</h4></div>
       <div class="section__body">
         <p class="lede reveal">
-          ScienceClaw is model- and framework-agnostic. Teams can combine frontier models, open models, their own models, existing agent frameworks, scientific datasets, compute, robots, sensors, and laboratory infrastructure.
+          ScienceClaw is model- and framework-agnostic. Teams can combine frontier models, open models, their own models, existing agent frameworks, scientific datasets, compute, sensors, and laboratory infrastructure.
+        </p>
+        <p class="reveal">
+          We will provide access to a shared pool of resources, including compute, models, tools, and other infrastructure, where available. Resources are limited and will be allocated based on project needs, technical fit, and availability.
         </p>
         <div class="card-grid">
-          <div class="card reveal"><span class="card__num">R1</span><h3>Scientific datasets</h3><p>Shared corpora and domain data for grounding investigations.</p></div>
-          <div class="card reveal"><span class="card__num">R2</span><h3>AI models & tools</h3><p>Foundation models, agent frameworks, and open tooling to compose into collectives.</p></div>
-          <div class="card reveal"><span class="card__num">R3</span><h3>Compute & tokens</h3><p>A common pool of credits so experimentation is never bottlenecked.</p></div>
-          <div class="card reveal"><span class="card__num">R4</span><h3>Hardware</h3><p>Robots, microcontrollers, and sensors for agents that act in the world.</p></div>
-          <div class="card reveal"><span class="card__num">R5</span><h3>Lab access</h3><p>Cloud labs and experimental infrastructure for closing the loop on real experiments.</p></div>
-          <div class="card reveal"><span class="card__num">R6</span><h3>Open problem space</h3><p>Sponsor-led challenges provide concrete inspiration — unexpected approaches welcome.</p></div>
+          <div class="card reveal"><span class="card__num">R1</span><h4>Scientific datasets</h4><p>Shared corpora and domain data for grounding investigations.</p></div>
+          <div class="card reveal"><span class="card__num">R2</span><h4>AI models & tools</h4><p>Foundation models, agent frameworks, and open tooling to compose into collectives.</p></div>
+          <div class="card reveal"><span class="card__num">R3</span><h4>Compute & tokens</h4><p>Shared compute and model resources may be available for project work, subject to project needs, technical fit, and availability.</p></div>
+          <div class="card reveal"><span class="card__num">R4</span><h4>Hardware</h4><p>Microcontrollers, sensors, and instruments for agents that act in the world.</p></div>
+          <div class="card reveal"><span class="card__num">R5</span><h4>Lab access</h4><p>Cloud labs and experimental infrastructure for closing the loop on real experiments.</p></div>
+          <div class="card reveal"><span class="card__num">R6</span><h4>Open problem space</h4><p>Sponsor-led challenges provide concrete inspiration — unexpected approaches welcome.</p></div>
         </div>
         <p class="reveal">
           The goal is not to prove that one model is best. Teams can use, reuse, modify, and combine available technology—including capabilities developed during the event—to build a functioning decentralized system that accomplishes something scientifically meaningful.
         </p>
       </div>
-    </section>
+      </div>
 
     <!-- CHALLENGE AREAS -->
-    <section class="section" id="areas">
-      <div class="section__head reveal">
-        <span class="section__index">04</span>
-        <h2 class="section__title">Challenge Areas</h2>
-      </div>
+      <div class="section__group" id="areas" aria-labelledby="areas-title">
+        <div class="section__subhead reveal"><h3 class="section__subtitle" id="areas-title">Challenge Areas</h4></div>
       <div class="section__body">
         <p class="lede reveal">
           Scientific domains are intentionally open. We provide challenge seeds, problems, datasets, resources,
@@ -180,22 +181,22 @@
         <div class="tracks">
           <div class="track reveal">
             <span class="track__num">A·01</span>
-            <h3>Biology & Protein Design</h3>
+            <h4>Biology & Protein Design</h4>
             <p>Collectives that hypothesize, design, and iterate across sequence, structure, and function.</p>
           </div>
           <div class="track reveal">
             <span class="track__num">A·02</span>
-            <h3>Robotics & Physical Agency</h3>
-            <p>Agents that reach beyond the browser into robots, sensors, and cloud laboratories.</p>
+            <h4>Physical Agency</h4>
+            <p>Agents that reach beyond the browser into sensors, instruments, and cloud laboratories.</p>
           </div>
           <div class="track reveal">
             <span class="track__num">A·03</span>
-            <h3>Manufacturing & Materials</h3>
+            <h4>Manufacturing & Materials</h4>
             <p>From candidate discovery to fabrication — closing the loop between simulation and matter.</p>
           </div>
           <div class="track reveal">
             <span class="track__num">A·04</span>
-            <h3>Open Scientific Challenge</h3>
+            <h4>Open Scientific Challenge</h4>
             <p>Participant-defined problems. Bring the question you can't stop thinking about.</p>
           </div>
         </div>
@@ -204,89 +205,19 @@
           competition, rather than separate tracks.
         </p>
       </div>
-    </section>
-
-    <!-- JUDGING -->
-    <section class="section" id="judging">
-      <div class="section__head reveal">
-        <span class="section__index">05</span>
-        <h2 class="section__title">Judging</h2>
       </div>
-      <div class="section__body">
-        <p class="lede reveal">
-          Science is the benchmark. Success is not simply whether an agent completed a task, but whether the system produced a scientifically meaningful result supported by evidence, validation, or measurable progress.
-        </p>
-        <p class="reveal">
-          The judging rubric also asks whether organizing capabilities as a decentralized collective adds something beyond a single agent, isolated agents, or a conventional workflow.
-        </p>
-
-        <div class="rubric">
-          <div class="rubric__row reveal">
-            <div class="rubric__info">
-              <h3>Problem Significance & Complexity</h3>
-              <p>How difficult, open-ended, consequential, and scientifically meaningful is the problem? Does solving it meaningfully advance a scientific or technical goal?</p>
-            </div>
-            <div class="rubric__weight"><div class="rubric__bar" data-w="20"></div><span>20%</span></div>
-          </div>
-          <div class="rubric__row reveal">
-            <div class="rubric__info">
-              <h3>Scientific/Technical Impact</h3>
-              <p>What was actually achieved? Is the result novel, meaningful, rigorous, and potentially useful?</p>
-            </div>
-            <div class="rubric__weight"><div class="rubric__bar" data-w="25"></div><span>25%</span></div>
-          </div>
-          <div class="rubric__row reveal">
-            <div class="rubric__info">
-              <h3>Decentralized Agency</h3>
-              <p>Are decision-making and capabilities meaningfully distributed across agents? Do agents have distinct information, resources, or capabilities? Can they coordinate and adapt without a central planner prescribing the entire trajectory?</p>
-            </div>
-            <div class="rubric__weight"><div class="rubric__bar" data-w="20"></div><span>20%</span></div>
-          </div>
-          <div class="rubric__row reveal">
-            <div class="rubric__info">
-              <h3>Collective Capability</h3>
-              <p>Does organizing agents collectively add measurable capability? Where possible, demonstrate this through a simple comparison such as multi-agent vs. single-agent, collaborative vs. isolated, or decentralized vs. centralized.</p>
-            </div>
-            <div class="rubric__weight"><div class="rubric__bar" data-w="25"></div><span>25%</span></div>
-          </div>
-          <div class="rubric__row reveal">
-            <div class="rubric__info">
-              <h3>Execution and Validation</h3>
-              <p>Is there a functioning system rather than just a concept? Is its performance demonstrated with convincing evidence, benchmarks, or real-world validation?</p>
-            </div>
-            <div class="rubric__weight"><div class="rubric__bar" data-w="10"></div><span>10%</span></div>
-          </div>
-        </div>
-
-        <div class="callout reveal">
-          <p>
-            <strong>Collaboration Bonus: +10</strong> — Collaboration is not part of the core judging score. Teams can earn up to +10 points by creating
-            capabilities that materially strengthen other teams, such as:
-          </p>
-          <ul style="margin-top: 0.8rem; padding-left: 1.2rem;">
-            <li>A tool or agent successfully reused by another team</li>
-            <li>Data, discoveries, or experiments that enable another team's result</li>
-            <li>Infrastructure that improves multiple systems</li>
-            <li>Capabilities that propagate through the ecosystem</li>
-          </ul>
-        </div>
-      </div>
-    </section>
 
     <!-- MULTI-AGENT SYSTEM -->
-    <section class="section" id="system">
-      <div class="section__head reveal">
-        <span class="section__index">06</span>
-        <h2 class="section__title">The Hackathon as a Multi-Agent System</h2>
-      </div>
+      <div class="section__group" id="system" aria-labelledby="system-title">
+        <div class="section__subhead reveal"><h3 class="section__subtitle" id="system-title">The Hackathon as a Multi-Agent System</h4></div>
       <div class="section__body">
         <p class="lede reveal">
           The hackathon operates across multiple levels:
         </p>
         <div class="card-grid">
-          <div class="card reveal"><span class="card__num">→</span><h3>Agents</h3><p>Collaborate within teams to solve problems.</p></div>
-          <div class="card reveal"><span class="card__num">→</span><h3>Teams</h3><p>Exchange capabilities across teams.</p></div>
-          <div class="card reveal"><span class="card__num">→</span><h3>Ecosystem</h3><p>Successful capabilities propagate because they increase the effectiveness of other systems.</p></div>
+          <div class="card reveal"><span class="card__num">→</span><h4>Agents</h4><p>Collaborate within teams to solve problems.</p></div>
+          <div class="card reveal"><span class="card__num">→</span><h4>Teams</h4><p>Exchange capabilities across teams.</p></div>
+          <div class="card reveal"><span class="card__num">→</span><h4>Ecosystem</h4><p>Successful capabilities propagate because they increase the effectiveness of other systems.</p></div>
         </div>
         <p class="reveal">
           The competition therefore becomes a live experiment in decentralized collective intelligence: teams
@@ -294,19 +225,312 @@
           stronger.
         </p>
       </div>
+      </div>
     </section>
 
-    <!-- COMMUNITY PARTNER -->
-    <section class="section community-partner" aria-labelledby="community-partner-title">
+    <!-- COMPETITION -->
+    <section class="section" id="competition">
       <div class="section__head reveal">
-        <span class="section__index">07</span>
-        <h2 class="section__title" id="community-partner-title">Community Partner</h2>
+        <span class="section__index">03</span>
+        <h2 class="section__title">Competition</h2>
       </div>
-      <div class="community-partner__card reveal">
-        <a class="community-partner__link" href="https://hardmode.media.mit.edu/"
-          target="_blank" rel="noopener noreferrer" aria-label="Visit Hardmode's website">
-          <img src="assets/logos/hardmode-logo-square.png" alt="Hardmode" />
+      <div class="section__group" id="judging" aria-labelledby="judging-title">
+        <div class="section__subhead reveal"><h3 class="section__subtitle" id="judging-title">Judging</h4></div>
+        <div class="section__body">
+          <p class="lede reveal">
+            Science is the benchmark. Success is not simply whether an agent completed a task, but whether the system produced a scientifically meaningful result supported by evidence, validation, or measurable progress.
+          </p>
+          <p class="reveal">
+            The judging rubric also asks whether organizing capabilities as a decentralized collective adds something beyond a single agent, isolated agents, or a conventional workflow.
+          </p>
+          <div class="rubric">
+            <div class="rubric__row reveal">
+              <div class="rubric__info">
+                <h4>Problem Significance & Complexity</h4>
+                <p>How difficult, open-ended, consequential, and scientifically meaningful is the problem? Does solving it meaningfully advance a scientific or technical goal?</p>
+              </div>
+              <div class="rubric__weight"><div class="rubric__bar" data-w="20"></div><span>20%</span></div>
+            </div>
+            <div class="rubric__row reveal">
+              <div class="rubric__info">
+                <h4>Scientific/Technical Impact</h4>
+                <p>What was actually achieved? Is the result novel, meaningful, rigorous, and potentially useful?</p>
+              </div>
+              <div class="rubric__weight"><div class="rubric__bar" data-w="25"></div><span>25%</span></div>
+            </div>
+            <div class="rubric__row reveal">
+              <div class="rubric__info">
+                <h4>Decentralized Agency</h4>
+                <p>Are decision-making and capabilities meaningfully distributed across agents? Do agents have distinct information, resources, or capabilities? Can they coordinate and adapt without a central planner prescribing the entire trajectory?</p>
+              </div>
+              <div class="rubric__weight"><div class="rubric__bar" data-w="20"></div><span>20%</span></div>
+            </div>
+            <div class="rubric__row reveal">
+              <div class="rubric__info">
+                <h4>Collective Capability</h4>
+                <p>Does organizing agents collectively add measurable capability? Where possible, demonstrate this through a simple comparison such as multi-agent vs. single-agent, collaborative vs. isolated, or decentralized vs. centralized.</p>
+              </div>
+              <div class="rubric__weight"><div class="rubric__bar" data-w="25"></div><span>25%</span></div>
+            </div>
+            <div class="rubric__row reveal">
+              <div class="rubric__info">
+                <h4>Execution and Validation</h4>
+                <p>Is there a functioning system rather than just a concept? Is its performance demonstrated with convincing evidence, benchmarks, or real-world validation?</p>
+              </div>
+              <div class="rubric__weight"><div class="rubric__bar" data-w="10"></div><span>10%</span></div>
+            </div>
+          </div>
+          <div class="callout reveal">
+            <p>
+              <strong>Collaboration Bonus: +10</strong> — Collaboration is not part of the core judging score. Teams can earn up to +10 points by creating
+              capabilities that materially strengthen other teams, such as:
+            </p>
+            <ul style="margin-top: 0.8rem; padding-left: 1.2rem;">
+              <li>A tool or agent successfully reused by another team</li>
+              <li>Data, discoveries, or experiments that enable another team's result</li>
+              <li>Infrastructure that improves multiple systems</li>
+              <li>Capabilities that propagate through the ecosystem</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="section__group judges" id="judges" aria-labelledby="judges-title">
+        <div class="section__subhead reveal"><h3 class="section__subtitle" id="judges-title">Judges</h3></div>
+        <div class="organizing-team__grid">
+          <article class="organizer-card reveal"><h4>Avijit Ghosh</h4><p>Lead Technical AI Policy Researcher at Hugging Face</p></article>
+          <article class="organizer-card reveal"><h4>Desiree Plata</h4><p>Associate Dean of Engineering at MIT</p></article>
+          <article class="organizer-card reveal"><h4>Yilun Du</h4><p>Assistant Professor at Harvard</p></article>
+          <article class="organizer-card reveal"><h4>Riken Shah</h4><p>Human Data team at xAI</p></article>
+          <article class="organizer-card reveal"><h4>Ian Ferguson</h4><p>Director of Hardware at FormLabs</p></article>
+          <article class="organizer-card reveal"><h4>Nikita Fedik</h4><p>Senior Technical Marketing Engineer at NVIDIA</p></article>
+        </div>
+      </div>
+
+      <div class="section__group prizes" id="prizes" aria-labelledby="prizes-title">
+        <div class="section__subhead reveal"><h3 class="section__subtitle" id="prizes-title">Prizes</h4></div>
+        <div class="prize-card reveal">
+          <p class="prize-card__eyebrow">E14 Fund Prize</p>
+          <p class="prize-card__amount"><span>$50K</span><sup>*</sup></p>
+          <p class="prize-card__condition">* Founder-friendly investment: $50K SAFE (no cap, no discount) on incorporation of an E14-backable startup.</p>
+        </div>
+        <div class="sponsor-prizes" aria-label="Sponsor prizes">
+          <article class="sponsor-prize reveal">
+            <p class="sponsor-prize__sponsor">NVIDIA</p>
+            <h3 class="sponsor-prize__item"><a href="https://www.nvidia.com/en-us/products/workstations/dgx-spark/" target="_blank" rel="noopener noreferrer">DGX Sparks</a></h3>
+
+          </article>
+          <article class="sponsor-prize reveal">
+            <p class="sponsor-prize__sponsor">Formlabs</p>
+            <h3 class="sponsor-prize__item"><a href="https://formlabs.com/3d-printers/form-studio-1/" target="_blank" rel="noopener noreferrer">Form Studio 1 Printer</a></h3>
+            <p class="sponsor-prize__details"></p>
+          </article>
+          <article class="sponsor-prize reveal">
+            <p class="sponsor-prize__sponsor">Alphaxiv</p>
+            <h3 class="sponsor-prize__item"><a href="https://openresearch.sh/" target="_blank" rel="noopener noreferrer">$500 in OpenResearch GPU Credits</a></h3>
+            <p class="sponsor-prize__details"></p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCHEDULE -->
+    <section class="section schedule" id="schedule" aria-labelledby="schedule-title">
+      <div class="section__head reveal">
+        <span class="section__index">04</span>
+        <h2 class="section__title" id="schedule-title">Schedule</h2>
+      </div>
+      <div class="schedule-grid">
+        <article class="schedule-day reveal" aria-labelledby="schedule-friday-title">
+          <h3 class="schedule-day__title" id="schedule-friday-title">Friday</h3>
+          <ol class="schedule-events">
+            <li><time datetime="17:00">5:00 PM</time><div class="schedule-event__details"><span class="schedule-event__name">Registration begins</span></div></li>
+            <li><time datetime="17:00">5:00–6:00 PM</time><div class="schedule-event__details"><span class="schedule-event__name">Dinner<br />presented by MIT School of Engineering</span></div></li>
+            <li><time datetime="18:00">6:00–7:00 PM</time><div class="schedule-event__details"><span class="schedule-event__name">NVIDIA workshop</span></div></li>
+            <li><time datetime="20:00">8:00–9:00 PM</time><div class="schedule-event__details"><span class="schedule-event__name">Team Forming</span></div></li>
+            <li><time datetime="21:00">9:00 PM</time><div class="schedule-event__details"><span class="schedule-event__name">Hacking starts</span></div></li>
+            <li><time datetime="23:00">11:00 PM</time><div class="schedule-event__details"><span class="schedule-event__name">Team Registration Deadline</span></div></li>
+          </ol>
+        </article>
+        <article class="schedule-day reveal" aria-labelledby="schedule-saturday-title">
+          <h3 class="schedule-day__title" id="schedule-saturday-title">Saturday</h3>
+          <ol class="schedule-events">
+            <li><time datetime="09:00">9:00–10:00 AM</time><div class="schedule-event__details"><span class="schedule-event__name">Breakfast<br />presented by Romix Biosciences</span></div></li>
+            <li><time datetime="10:00">10:00–11:00 AM</time><div class="schedule-event__details"><span class="schedule-event__name">Formlabs Workshop</span></div></li>
+            <li><time datetime="13:00">1:00 PM</time><div class="schedule-event__details"><span class="schedule-event__name">Lunch<br />presented by Lila</span></div></li>
+            <li><time datetime="19:00">7:00 PM</time><div class="schedule-event__details"><span class="schedule-event__name">Dinner<br />presented by Formlabs</span></div></li>
+            <li><time datetime="20:00">8:00 PM</time><div class="schedule-event__details"><span class="schedule-event__name">Hacking until midnight</span></div></li>
+          </ol>
+        </article>
+        <article class="schedule-day reveal" aria-labelledby="schedule-sunday-title">
+          <h3 class="schedule-day__title" id="schedule-sunday-title">Sunday</h3>
+          <ol class="schedule-events">
+            <li><time datetime="09:00">9:00–10:00 AM</time><div class="schedule-event__details"><span class="schedule-event__name">Breakfast</span></div></li>
+            <li><time datetime="13:00">1:00 PM</time><div class="schedule-event__details"><span class="schedule-event__name">Lunch</span></div></li>
+            <li><time datetime="14:30">2:30 PM</time><div class="schedule-event__details"><span class="schedule-event__name">End of hacking - final slides due</span></div></li>
+            <li><time datetime="15:00">3:00 PM</time><div class="schedule-event__details"><span class="schedule-event__name">Talk</span></div></li>
+            <li><time datetime="16:00">4:00 PM</time><div class="schedule-event__details"><span class="schedule-event__name">Presentations &amp; Judging panel</span></div></li>
+            <li><time datetime="16:30">4:30 PM</time><div class="schedule-event__details"><span class="schedule-event__name">Awards &amp; Closing Ceremony</span></div></li>
+            <li><time datetime="17:00">5:00 PM</time><div class="schedule-event__details"><span class="schedule-event__name">Cleanup</span></div></li>
+          </ol>
+        </article>
+      </div>
+    </section>
+
+    <!-- COMMUNITY -->
+    <section class="section" id="community">
+      <div class="section__head reveal">
+        <span class="section__index">05</span>
+        <h2 class="section__title">Community</h2>
+      </div>
+      <div class="section__group organizing-team" id="organizing-team" aria-labelledby="organizing-team-title">
+        <div class="section__subhead reveal">
+          <h3 class="section__subtitle" id="organizing-team-title">Organizing Team</h4>
+        </div>
+      <div class="organizing-team__grid">
+        <article class="organizer-card reveal"><h4><a href="https://www.linkedin.com/in/markus-j-buehler-2245682" target="_blank" rel="noopener noreferrer">Markus J. Buehler</a></h4><p>McAfee Professor of Engineering · Director and PI, Laboratory for Atomistic and Molecular Mechanics (LAMM) · MIT</p></article>
+        <article class="organizer-card reveal"><h4><a href="https://www.linkedin.com/in/hhaddad" target="_blank" rel="noopener noreferrer">Habib Haddad</a></h4><p>Managing Partner · E14 Fund</p></article>
+        <article class="organizer-card reveal"><h4><a href="https://www.linkedin.com/in/calvinwuchin" target="_blank" rel="noopener noreferrer">Calvin Chin</a></h4><p>Managing Partner · E14 Fund</p></article>
+        <article class="organizer-card reveal"><h4><a href="https://www.linkedin.com/in/andreatporras" target="_blank" rel="noopener noreferrer">Andrea Porras</a></h4><p>Head of Community · E14 Fund</p></article>
+        <article class="organizer-card reveal"><h4><a href="https://www.linkedin.com/in/fionawang108" target="_blank" rel="noopener noreferrer">Fiona Wang</a></h4><p>PhD Candidate · LAMM · MIT</p></article>
+        <article class="organizer-card reveal"><h4><a href="https://www.linkedin.com/in/jaimeberkovich" target="_blank" rel="noopener noreferrer">Jaime Berkovich</a></h4><p>PhD Candidate · LAMM · MIT</p></article>
+        <article class="organizer-card reveal"><h4><a href="https://www.linkedin.com/in/palsubhadeep" target="_blank" rel="noopener noreferrer">Subhadeep Pal</a></h4><p>Postdoctoral Associate · LAMM · MIT</p></article>
+        <article class="organizer-card reveal"><h4><a href="https://www.linkedin.com/in/brunohoward" target="_blank" rel="noopener noreferrer">Bruno Howard</a></h4><p>Research Associate, LAMM · MIT</p></article>
+        <article class="organizer-card reveal"><h4><a href="https://www.linkedin.com/in/awuchen" target="_blank" rel="noopener noreferrer">Awu Chen</a></h4><p>M.S. Candidate, Tangible Media Group · MIT</p></article>
+        <article class="organizer-card reveal"><h4><a href="https://www.linkedin.com/in/keira-boone" target="_blank" rel="noopener noreferrer">Keira Boone</a></h4><p>Organizer</p></article>
+        <article class="organizer-card reveal"><h4><a href="https://www.linkedin.com/in/lee-marom-9aa1b011b" target="_blank" rel="noopener noreferrer">Lee Marom</a></h4><p>PhD Student · LAMM · MIT</p></article>
+        <article class="organizer-card reveal"><h4><a href="https://www.linkedin.com/in/max-bauer42" target="_blank" rel="noopener noreferrer">Maxwell Bauer</a></h4><p>PhD Student, Mechanical Engineering · MIT</p></article>
+      </div>
+      </div>
+
+      <div class="section__group community-partner" id="partners" aria-labelledby="community-partner-title">
+        <div class="section__subhead reveal">
+          <h3 class="section__subtitle" id="community-partner-title">With People From</h3>
+        </div>
+      <div class="partner-grid">
+        <a class="partner-logo partner-logo--hardmode reveal" href="https://hardmode.media.mit.edu/"
+            target="_blank" rel="noopener noreferrer" aria-label="Visit Hardmode">
+            <img src="assets/logos/hardmode-logo-square.png" alt="Hardmode" />
         </a>
+        <a class="partner-logo partner-logo--sundai reveal" href="https://www.sundai.foundation/"
+            target="_blank" rel="noopener noreferrer" aria-label="Visit Sundai">
+            <img src="assets/logos/sundai_logo_dark_horizontal.svg" alt="Sundai" />
+        </a>
+        <a class="partner-logo partner-logo--harvard reveal" href="https://www.harvard.edu/" target="_blank" rel="noopener noreferrer" aria-label="Visit Harvard University">
+          <img src="assets/logos/harvard-veritas.png" alt="Harvard Veritas shield" />
+        </a>
+        <a class="partner-logo partner-logo--umich reveal" href="https://umich.edu/" target="_blank" rel="noopener noreferrer" aria-label="Visit the University of Michigan">
+          <img src="assets/logos/umich-logo.svg" alt="University of Michigan logo" />
+        </a>
+        <a class="partner-logo partner-logo--mit reveal" href="https://www.mit.edu/" target="_blank" rel="noopener noreferrer" aria-label="Visit MIT">
+          <img src="assets/logos/mit-lockup.svg" alt="MIT wordmark" />
+        </a>
+        <a class="partner-logo partner-logo--reactorfield reveal" href="https://reactorfield.com/" target="_blank" rel="noopener noreferrer" aria-label="Visit ReactorField">
+          <img src="assets/logos/reactorfield-transparent-for-dark.png" alt="ReactorField" />
+        </a>
+      </div>
+      </div>
+
+      <!-- REVIEW ONLY: do not deploy until Anthropic approves Claude logo use and NVIDIA provides written logo authorization. -->
+      <div class="section__group sponsor-partners" id="sponsors" aria-labelledby="sponsors-title">
+        <div class="section__subhead reveal">
+          <h3 class="section__subtitle" id="sponsors-title">Sponsors</h3>
+        </div>
+        <div class="sponsor-grid">
+          <article class="sponsor-card sponsor-card--nvidia reveal" aria-label="NVIDIA Platform">
+            <span class="sponsor-card__tier sponsor-card__tier--platinum">Platform</span>
+            <div class="sponsor-card__nvidia-stage">
+              <img class="sponsor-card__nvidia-logo" src="assets/logos/nvidia-logo-vertical-white.png" alt="NVIDIA" />
+            </div>
+          </article>
+          <article class="sponsor-card sponsor-card--gold reveal" aria-label="Builder sponsors: Claude, Formlabs, Nebius, Stifel, and Google Cloud">
+            <span class="sponsor-card__tier sponsor-card__tier--gold">Builder</span>
+            <div class="sponsor-card__builder-logos">
+              <img class="sponsor-card__claude-logo sponsor-card__builder-logo" src="assets/logos/claude-logo-ivory.svg" alt="Claude" />
+              <img class="sponsor-card__builder-formlabs sponsor-card__builder-logo" src="assets/logos/formlabs-logo.png" alt="Formlabs" />
+              <img class="sponsor-card__builder-logo sponsor-card__builder-logo--light sponsor-card__builder-logo--nebius" src="assets/logos/nebius-logo.png" alt="Nebius" />
+              <img class="sponsor-card__builder-logo sponsor-card__builder-logo--second-row" src="assets/logos/stifel-logo.png" alt="Stifel" />
+              <img class="sponsor-card__builder-logo sponsor-card__builder-logo--google" src="assets/logos/google-cloud.png" alt="Google Cloud" />
+            </div>
+          </article>
+        </div>
+        <div class="other-sponsors">
+          <h4 class="sponsor-card__tier sponsor-card__tier--supporter" id="supporter-sponsors-title">Supporter</h4>
+          <div class="other-sponsor-grid" aria-labelledby="supporter-sponsors-title">
+            <div class="other-sponsor-tile reveal" aria-label="Romix Biosciences">
+              <img src="assets/logos/Romix.webp" alt="Romix Biosciences" />
+            </div>
+            <div class="other-sponsor-tile other-sponsor-tile--mitsoe reveal" aria-label="MIT School of Engineering">
+              <img src="assets/logos/mitsoe-logo-share.png" alt="MIT School of Engineering" />
+            </div>
+            <div class="other-sponsor-tile other-sponsor-tile--alphaxiv reveal" aria-label="Alphaxiv">
+              <img src="assets/logos/alphaxiv-large.png" alt="Alphaxiv" />
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section faq" id="faq" aria-labelledby="faq-title">
+      <div class="section__head reveal">
+        <span class="section__index">06</span>
+        <h2 class="section__title" id="faq-title">FAQ</h2>
+      </div>
+      <div class="faq__list">
+        <details class="faq__item reveal">
+          <summary>Can I participate remotely?</summary>
+          <p>We won’t be set up for remote or hybrid participation. This is an in-person event.</p>
+        </details>
+        <details class="faq__item reveal">
+          <summary>How many people are on each team?</summary>
+          <p>Teams can have 2 to 5 members, and every member should attend in person.</p>
+        </details>
+        <details class="faq__item reveal">
+          <summary>How do I join a team or find teammates?</summary>
+          <p>If you don’t have a team yet, we’ll set aside time for team formation during kickoff on Friday, October 30. To join a team that’s already registered, apply on Luma and list your teammates’ names in your application. Once you’re approved, we’ll add you to the ScienceClaw Discord, where you can meet other participants and start forming a team before the event.</p>
+        </details>
+        <details class="faq__item reveal">
+          <summary>Can I volunteer?</summary>
+          <p>Yes. To volunteer, email <a href="mailto:scienceclaw@mit.edu">scienceclaw@mit.edu</a>.</p>
+        </details>
+        <details class="faq__item reveal">
+          <summary>When and where is ScienceClaw?</summary>
+          <p>ScienceClaw runs October 30–November 1, 2026 at the MIT Media Lab.</p>
+        </details>
+        <details class="faq__item reveal">
+          <summary>Where can I stay near MIT?</summary>
+          <p>Nearby options listed by MIT include The Kendall Hotel, Boston Marriott Cambridge, and Residence Inn Boston Cambridge, all in Kendall Square. See <a href="https://www.mit.edu/visitmit/where-stay/" target="_blank" rel="noopener noreferrer">MIT's full hotel list</a>. MIT recommends reserving ahead and notes that it does not guarantee listed accommodations.</p>
+        </details>
+        <details class="faq__item reveal">
+          <summary>Can our team define its own challenge?</summary>
+          <p>Yes. Teams can formulate their own scientific or technical problems and work across challenge areas. There is one overall competition, not separate tracks.</p>
+        </details>
+        <details class="faq__item reveal">
+          <summary>What should we build?</summary>
+          <p>Build a functioning decentralized system that uses agents to make measurable progress on a meaningful scientific or technical problem. Show the result with evidence, validation, or benchmarks.</p>
+        </details>
+        <details class="faq__item reveal">
+          <summary>Which models and tools can we use?</summary>
+          <p>ScienceClaw is model- and framework-agnostic. Use frontier or open models, your own models, agent frameworks, datasets, compute, sensors, and laboratory infrastructure.</p>
+        </details>
+        <details class="faq__item reveal">
+          <summary>What resources will be available?</summary>
+          <p>A shared pool of compute, models, tools, and other infrastructure may be available. Resources are limited and allocated based on project needs, technical fit, and availability.</p>
+        </details>
+        <details class="faq__item reveal">
+          <summary>How will projects be judged?</summary>
+          <p>Judges look for scientifically meaningful results, technical impact, decentralized agency, collective capability, and strong execution and validation. Teams can also earn up to 10 collaboration-bonus points for capabilities that materially help other teams.</p>
+        </details>
+        <details class="faq__item reveal">
+          <summary>What are the prizes?</summary>
+          <p>Prizes include the E14 Fund Prize ($50K SAFE, no cap, no discount, on incorporation of an E14-backable startup), a Formlabs Form Studio 1 printer, three NVIDIA DGX Sparks, and alphaXiv OpenResearch GPU credits, with more to be announced.</p>
+        </details>
+        <details class="faq__item reveal">
+          <summary>How do I register?</summary>
+          <p>Register through the <a href="https://luma.com/event/evt-lrhAXSeA3Dq8uSI" target="_blank" rel="noopener noreferrer">ScienceClaw event page on Luma</a>.</p>
+        </details>
       </div>
     </section>
 
@@ -316,7 +540,8 @@
         <span class="apply__kicker">ScienceClaw · Oct 30 – Nov 1, 2026 · MIT Media Lab</span>
         <h2 class="apply__title">Join the collective.</h2>
         <p>October 30 – November 1, 2026. Bring a problem — or come find one.</p>
-        <a class="btn btn--solid btn--big" href="apply.html">Apply now</a>
+        <p>Final application deadline: October 26, 2026.</p>
+        <a class="btn btn--solid btn--big luma-checkout--button" href="https://luma.com/event/evt-lrhAXSeA3Dq8uSI" data-luma-action="checkout" data-luma-event-id="evt-lrhAXSeA3Dq8uSI">Apply now</a>
       </div>
     </section>
     <footer class="footer">
@@ -333,6 +558,7 @@
   <script type="module" src="js/scene.js"></script>
   <script type="module" src="js/main.js"></script>
   <script src="js/tentacles.js" defer></script>
+  <script id="luma-checkout" src="https://embed.lu.ma/checkout-button.js"></script>
   <script>
     // Handle fragment navigation after content is ready
     if (location.hash) {

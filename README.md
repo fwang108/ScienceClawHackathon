@@ -1,47 +1,25 @@
-# ScienceClaw — Hackathon Website
+# ScienceClaw Hackathon
 
-Static site for the **ScienceClaw: Internet of Agents Hackathon**, MIT Media Lab, Oct 30 – Nov 1, 2026.
+Website for the **ScienceClaw: Internet of Agents Hackathon**, held at MIT Media Lab, October 30–November 1, 2026.
 
-Three visual themes of the same hackathon page — pick the one you like, or use them side-by-side to A/B test the look.
+**Live site:** https://scienceclawhack.ai/
 
-## ScienceClaw — Black & gold (live)
-
-The production-ready build lives in `swarm/` and uses `https://scienceclawhack.ai`. It preserves the black-and-gold visual system with the ScienceClaw origami pincer mark.
-
-## v1 — Blue (synthwave)
-
-Origami cranes over an ocean surface, dark blue + cyan. Original theme.
-
-![v1 — origami cranes](v1/cranes-blue.gif)
-
-## v2 — Gold (black & gold variant)
-
-Re-themed fork: glowing infinity logo, partner logos, layered tentacles/anemone effect that fades in as you scroll, same content and structure.
-
-![v2 — origami cranes](v2/cranes-gold.gif)
-
-## Run
-
-No build step. Any static file server works:
+## Run locally
 
 ```bash
-cd swarm   # or v1, v2
-python3 -m http.server 8000
+python3 -m http.server 8000 --directory swarm
 ```
 
-Then open `http://localhost:8000`.
+Open http://localhost:8000. No installation or build step is required.
 
-The 3D scene pulls Three.js from jsDelivr CDN (`three@0.160.0`), so an internet connection is needed to render the background. Text and layout are fully local.
+## Site files
 
-## Structure
+- `swarm/index.html` — event information, judges, prizes, schedule, sponsors, and FAQ
+- `swarm/apply.html` — Luma registration
+- `swarm/flyer.html` — printable event flyer
+- `swarm/css/`, `swarm/js/`, `swarm/assets/` — styles, interactions, and referenced artwork
+- `swarm/vercel.json` — canonical-domain redirect
 
-- `swarm/` — live black & gold build (prepared for scienceclawhack.ai), ScienceClaw identity and origami pincer mark
-- `v1/` — blue synthwave theme (original)
-- `v2/` — black & gold theme (variant)
+Deploy `swarm/` as the static site root. The repository-root page redirects to `swarm/` for previews served from the repository root.
 
-All themes share the same nav/sections/apply page and the same `js/main.js` interactions. Only the palette, hero logo treatment, and the canvas overlay effects differ.
-
-## Notes
-
-- Relative asset paths throughout, so each theme runs standalone at any static host.
-- `prefers-reduced-motion` is respected: animations render one static frame only when the user requests reduced motion.
+The homepage and its assets match the live deployment retrieved on October 26, 2026. Google Fonts, Three.js, and Luma load externally; internet access is needed for those features. Animations respect reduced-motion preferences.
