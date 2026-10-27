@@ -1038,7 +1038,7 @@ body.no-webgl {
 
 .sponsor-card {
   display: grid;
-  grid-template-columns: minmax(9rem, 0.26fr) minmax(0, 1fr);
+  grid-template-columns: minmax(7rem, 0.18fr) minmax(0, 1fr);
   grid-template-rows: 1fr;
   justify-items: stretch;
   align-items: center;
@@ -1120,7 +1120,7 @@ body.no-webgl {
   align-items: center;
   justify-content: center;
   justify-self: center;
-  width: min(100%, 16rem);
+  width: min(100%, 18rem);
   min-height: 9rem;
   margin: 0;
   padding: 0;
@@ -1129,60 +1129,41 @@ body.no-webgl {
 
 .sponsor-card__nvidia-logo {
   display: block;
-  width: min(100%, 11rem);
-  height: auto;
-}
-
-.sponsor-card__claude-logo {
-  display: block;
   width: min(100%, 18rem);
   height: auto;
-  margin: 0 auto;
 }
 
 .sponsor-card__builder-logos {
   display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-auto-rows: minmax(5rem, auto);
   align-items: center;
   justify-items: center;
-  gap: 1rem 0.5rem;
+  gap: 1.25rem 2rem;
   width: 100%;
   min-height: 12rem;
-  padding-inline: 0.5rem;
+  padding: 0.5rem;
 }
 
 .sponsor-card__builder-logo {
   display: block;
-  grid-column: span 2;
   width: 100%;
   max-width: 10rem;
   height: auto;
-  max-height: 6.5rem;
+  max-height: 4.5rem;
   object-fit: contain;
 }
 
-.sponsor-card__builder-formlabs {
-  padding: 0;
-  filter: brightness(0) invert(1);
-  background: transparent;
-}
-
+.sponsor-card__builder-formlabs,
 .sponsor-card__builder-logo--light { filter: brightness(0) invert(1); }
-.sponsor-card__builder-logo--nebius { max-width: 10rem; max-height: 2.5rem; }
-.sponsor-card__builder-logo--second-row { grid-column: 2 / span 2; max-width: 7rem; }
-
-.sponsor-card__builder-logo--google {
-  grid-column: 4 / span 2;
-  width: 100%;
-  max-width: 7rem;
-  height: auto;
-  max-height: 6.5rem;
-}
-
+.sponsor-card__builder-logo--nebius { max-height: 2.5rem; }
+.sponsor-card__builder-logo--edison { max-width: 9rem; }
+.sponsor-card__builder-logo--stifel { max-width: 7rem; }
+.sponsor-card__builder-logo--google { max-width: 12rem; }
 
 .other-sponsors {
   display: grid;
-  grid-template-columns: minmax(9rem, 0.26fr) minmax(0, 1fr);
+  grid-template-columns: minmax(7rem, 0.18fr) minmax(0, 1fr);
   grid-template-rows: 1fr;
   align-items: center;
   gap: 1.25rem;
@@ -1208,61 +1189,34 @@ body.no-webgl {
 
 .other-sponsor-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  column-gap: clamp(3rem, 7vw, 5.5rem);
-  row-gap: 1.5rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: center;
+  gap: 1.5rem;
+  width: 100%;
 }
 
 .other-sponsor-tile {
   display: flex;
   align-items: center;
   justify-content: center;
+  min-width: 0;
   min-height: 7rem;
-  padding: 0.85rem;
-  border: 0;
-  border-radius: 8px;
+  padding: 0.25rem;
   background: transparent;
 }
 
 .other-sponsor-tile img {
   display: block;
   width: 100%;
-  max-width: 14rem;
-  max-height: 5rem;
+  max-width: 11rem;
+  height: auto;
+  max-height: 3rem;
   object-fit: contain;
 }
 
-.other-sponsor-tile--mitsoe {
-  min-height: 8rem;
-}
-
-.other-sponsor-tile--mitsoe img {
-  max-width: 18rem;
-  max-height: 6rem;
-}
-
-.other-sponsor-tile--alphaxiv {
-  min-height: 8rem;
-}
-
-.other-sponsor-tile--alphaxiv img {
-  max-width: 18rem;
-  max-height: 6rem;
-}
-
-@media (min-width: 821px) {
-  .other-sponsor-tile--alphaxiv {
-    transform: translateX(-1.5rem);
-  }
-}
-
-.other-sponsor-tile--wordmark {
-  color: #171717;
-  font-family: var(--sans);
-  font-size: clamp(1.6rem, 3vw, 2.25rem);
-  font-weight: 600;
-  letter-spacing: -0.06em;
-}
+.other-sponsor-tile--alphaxiv img,
+.other-sponsor-tile--mitsoe img { filter: brightness(0) invert(1); }
+.other-sponsor-tile--lila img { max-width: 10rem; }
 
 .partner-grid {
   display: grid;
@@ -1313,7 +1267,7 @@ body.no-webgl {
   .sponsor-grid { grid-template-columns: 1fr; width: min(100%, 68rem); }
   .sponsor-card { grid-template-columns: 1fr; justify-items: center; text-align: center; }
   .sponsor-card__tier { justify-self: center; }
-  .sponsor-card__builder-logos { justify-content: center; }
+  .sponsor-card__builder-logos { gap: 1.25rem 1.5rem; }
   .other-sponsors { grid-template-columns: 1fr; }
   .other-sponsors .sponsor-card__tier { justify-self: center; }
   .other-sponsor-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -1324,7 +1278,10 @@ body.no-webgl {
 @media (max-width: 480px) {
   .partner-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .partner-logo--mit { grid-column: 1 / -1; justify-self: center; width: 60%; }
-  .other-sponsor-tile { min-height: 6.5rem; padding: 1rem; }
+  .sponsor-card, .other-sponsors { padding: 1.25rem; }
+  .sponsor-card__builder-logos { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem 1.5rem; padding: 0; }
+  .other-sponsor-tile { min-height: 4.5rem; }
+  .other-sponsor-grid { gap: 1rem 1.5rem; }
   .schedule-grid { grid-template-columns: 1fr; }
   .schedule-day:last-child { grid-column: auto; }
 }
