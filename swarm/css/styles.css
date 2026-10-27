@@ -1214,8 +1214,7 @@ body.no-webgl {
   object-fit: contain;
 }
 
-.other-sponsor-tile--alphaxiv img,
-.other-sponsor-tile--mitsoe img { filter: brightness(0) invert(1); }
+.other-sponsor-tile--alphaxiv img { filter: brightness(0) invert(1); }
 .other-sponsor-tile--lila img { max-width: 10rem; }
 
 .partner-grid {
