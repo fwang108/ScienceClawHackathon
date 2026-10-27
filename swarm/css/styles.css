@@ -1207,15 +1207,15 @@ body.no-webgl {
 
 .other-sponsor-tile img {
   display: block;
-  width: 90%;
-  max-width: 9.9rem;
+  width: 81%;
+  max-width: 8.91rem;
   height: auto;
-  max-height: 2.7rem;
+  max-height: 2.43rem;
   object-fit: contain;
 }
 
 .other-sponsor-tile--alphaxiv img { filter: brightness(0) invert(1); }
-.other-sponsor-tile--lila img { max-width: 9rem; }
+.other-sponsor-tile--lila img { max-width: 8.1rem; }
 
 .partner-grid {
   display: grid;
