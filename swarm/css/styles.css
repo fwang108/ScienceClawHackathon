@@ -1174,9 +1174,8 @@ body.no-webgl {
   object-fit: contain;
 }
 
-.sponsor-card__builder-formlabs,
-.sponsor-card__builder-logo--light { filter: brightness(0) invert(1); }
-.sponsor-card__builder-logo--nebius { max-height: 2.5rem; }
+.sponsor-card__builder-formlabs { filter: brightness(0) invert(1); }
+.sponsor-card__builder-logo--nebius { max-height: 3rem; }
 .sponsor-card__builder-logo--edison { max-width: 9rem; }
 .sponsor-card__builder-logo--stifel { max-width: 7rem; }
 .sponsor-card__builder-logo--google { max-width: 12rem; }
