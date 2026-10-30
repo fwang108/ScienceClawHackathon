@@ -1237,22 +1237,22 @@ body.no-webgl {
 
 .other-sponsor-tile img {
   display: block;
-  width: 81%;
-  max-width: 8.91rem;
+  width: 72.9%;
+  max-width: 8.019rem;
   height: auto;
-  max-height: 2.43rem;
+  max-height: 2.187rem;
   object-fit: contain;
 }
 
 /* Preserve the official SVG's clear space while matching the visible wordmark size. */
 .other-sponsor-tile--openai img {
-  width: 100%;
-  max-width: 12.7rem;
+  width: 90%;
+  max-width: 11.43rem;
   max-height: none;
 }
 
 .other-sponsor-tile--alphaxiv img { filter: brightness(0) invert(1); }
-.other-sponsor-tile--lila img { max-width: 8.1rem; }
+.other-sponsor-tile--lila img { max-width: 7.29rem; }
 
 .partner-grid {
   display: grid;
