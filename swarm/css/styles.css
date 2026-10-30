@@ -1208,13 +1208,14 @@ body.no-webgl {
 
 .other-sponsor-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(6, minmax(0, 1fr));
   align-items: center;
-  gap: 1.5rem;
+  gap: 0.5rem 0.75rem;
   width: 100%;
 }
 
 .other-sponsor-tile {
+  grid-column: span 2;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1224,6 +1225,9 @@ body.no-webgl {
   background: transparent;
 }
 
+.other-sponsor-tile:nth-child(4) { grid-column: 2 / span 2; }
+.other-sponsor-tile:nth-child(5) { grid-column: 4 / span 2; }
+
 .other-sponsor-tile img {
   display: block;
   width: 81%;
@@ -1231,6 +1235,13 @@ body.no-webgl {
   height: auto;
   max-height: 2.43rem;
   object-fit: contain;
+}
+
+/* Preserve the official SVG's clear space while matching the visible wordmark size. */
+.other-sponsor-tile--openai img {
+  width: 100%;
+  max-width: 12.7rem;
+  max-height: none;
 }
 
 .other-sponsor-tile--alphaxiv img { filter: brightness(0) invert(1); }
@@ -1288,7 +1299,6 @@ body.no-webgl {
   .sponsor-card__builder-logos { gap: 1.25rem 1.5rem; }
   .other-sponsors { grid-template-columns: 1fr; }
   .other-sponsors .sponsor-card__tier { justify-self: center; }
-  .other-sponsor-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .schedule-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .schedule-day:last-child { grid-column: 1 / -1; }
 }
@@ -1299,7 +1309,7 @@ body.no-webgl {
   .sponsor-card, .other-sponsors { padding: 1.25rem; }
   .sponsor-card__builder-logos { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem 1.5rem; padding: 0; }
   .other-sponsor-tile { min-height: 4.5rem; }
-  .other-sponsor-grid { gap: 1rem 1.5rem; }
+  .other-sponsor-grid { gap: 0.75rem 0.5rem; }
   .schedule-grid { grid-template-columns: 1fr; }
   .schedule-day:last-child { grid-column: auto; }
 }
