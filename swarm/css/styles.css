@@ -1217,8 +1217,10 @@ body.no-webgl {
   display: grid;
   grid-template-columns: repeat(6, minmax(0, 1fr));
   align-items: center;
-  gap: 0.5rem 0.75rem;
+  justify-self: center;
+  gap: 0.4rem 0.75rem;
   width: 100%;
+  max-width: 44rem;
 }
 
 .other-sponsor-tile {
@@ -1227,7 +1229,7 @@ body.no-webgl {
   align-items: center;
   justify-content: center;
   min-width: 0;
-  min-height: 7rem;
+  min-height: 6.25rem;
   padding: 0.25rem;
   background: transparent;
 }
@@ -1315,8 +1317,8 @@ body.no-webgl {
   .partner-logo--mit { grid-column: 1 / -1; justify-self: center; width: 60%; }
   .sponsor-card, .other-sponsors { padding: 1.25rem; }
   .sponsor-card__builder-logos { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem 1.5rem; padding: 0; }
-  .other-sponsor-tile { min-height: 4.5rem; }
-  .other-sponsor-grid { gap: 0.75rem 0.5rem; }
+  .other-sponsor-tile { min-height: 4rem; }
+  .other-sponsor-grid { gap: 0.5rem 0.5rem; }
   .schedule-grid { grid-template-columns: 1fr; }
   .schedule-day:last-child { grid-column: auto; }
 }
